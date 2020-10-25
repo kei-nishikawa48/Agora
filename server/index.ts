@@ -9,7 +9,7 @@ const server = new ApolloServer({
 
 const start_server = async () => {
   try {
-    const res = await server.listen(3000);
+    const res = await server.listen();
     console.log(`Server ready at ${res.url}`);
   } catch (res) {
     console.log(res);
