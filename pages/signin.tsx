@@ -1,4 +1,7 @@
-import React from 'react';
+import { useEffect, useContext } from 'react';
+import Router from 'next/router';
+import firebase from '../utils/Firebase';
+import { AuthContext } from '../context/Auth';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useForm } from 'react-hook-form';
 
 function Copyright() {
   return (
@@ -47,8 +51,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const { register, handleSubmit } = useForm();
   const classes = useStyles();
+  const { currentUser } = useContext(AuthContext);
+  useEffect(() => {
+    currentUser && Router.push('/');
+  }, [currentUser]);
 
+  interface data {
+    email: string;
+    password: string;
+  }
+  const login = (data: data) => {
+    firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,7 +75,11 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          onSubmit={handleSubmit(login)}
+          className={classes.form}
+          noValidate
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +90,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            inputRef={register}
           />
           <TextField
             variant="outlined"
@@ -81,6 +102,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            inputRef={register}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
