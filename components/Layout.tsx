@@ -20,6 +20,14 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           <a>Home</a>
         </Link>{' '}
         |{' '}
+        <Link href="/form">
+          <a>Form</a>
+        </Link>{' '}
+        |{' '}
+        <Link href="/signin">
+          <a>Signin</a>
+        </Link>{' '}
+        |{' '}
         <Link href="/about">
           <a>About</a>
         </Link>{' '}
@@ -36,6 +44,6 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <span>I'm here to stay (Footer)</span>
     </footer>
   </div>
-)
+);
 
 export default Layout
