@@ -10,3 +10,4 @@ module.exports = {
     FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
   },
 }
+
