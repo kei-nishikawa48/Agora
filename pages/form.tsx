@@ -1,7 +1,7 @@
+import Button from '@material-ui/core/Button';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import styled from 'styled-components';
 import React from "react"
-import { Markdown } from '../components/Markdown';
 import { MarkdownEditor } from '../components/MarkdownEditor';
 import Layout from '../components/Layout';
 import {useForm} from "react-hook-form"
@@ -21,11 +21,11 @@ export default function Form() {
       ref={register({required:true})}
       />
       {errors.title&&<p>タイトルを入力してください</p>}
+      <Button>タグ追加</Button>
       <ChipsArray/>
     </form>
     <Page>
-      <MarkdownEditor value={value} set_value={set_value} />
-      <Markdown value={value} />
+      <MarkdownEditor  value={value} set_value={set_value} />
     </Page>
     </Layout>
   );
@@ -37,5 +37,5 @@ const Page = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 50%;
+  width: 100%;
 `;
