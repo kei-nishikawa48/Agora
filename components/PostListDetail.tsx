@@ -1,6 +1,11 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Post } from '../interfaces';
+
+export type Post = {
+  title:String
+  id:number
+  text:String
+}
 
 type PostListDetailProps = {
   item: Post;
