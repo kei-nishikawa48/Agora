@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-type Post = {
+export type Post = {
   title:String
-  id:Number
+  id:number
   text:String
 }
 
