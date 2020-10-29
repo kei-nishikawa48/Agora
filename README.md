@@ -44,6 +44,3 @@ const MAX_NUM = 100:
 const handle_click = () => {};
 ```
 
-test
-test2
-test3
