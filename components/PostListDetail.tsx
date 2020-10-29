@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import Link from 'next/link';
 import { Post } from '../interfaces';
 
 type PostListDetailProps = {
@@ -11,6 +11,10 @@ const PostListDetail = ({ item: post }: PostListDetailProps) => (
     <h1>Detail for {post.title}</h1>
     <p>ID: {post.id}</p>
     <p>Description: {post.text}</p>
+    <Link href="/posts/edit">
+      <button>編集</button>
+    </Link>
+    {/* <button>削除</button> */}
   </div>
 );
 
