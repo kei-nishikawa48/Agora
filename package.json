@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
+    "@types/react-syntax-highlighter": "^13.5.0",
+    "@types/showdown": "^1.9.3",
     "apollo-server-express": "^2.18.2",
     "cors": "^2.8.5",
     "dataloader": "^2.0.0",
     "express": "^4.17.1",
-    "@types/react-syntax-highlighter": "^13.5.0",
-    "@types/showdown": "^1.9.3",
     "firebase": "^7.24.0",
     "graphql": "^15.3.0",
     "next": "latest",
@@ -26,7 +26,9 @@
     "react-mde": "^11.0.0",
     "react-syntax-highlighter": "^15.2.1",
     "remark-gfm": "^1.0.0",
+    "sequelize": "^6.3.5",
     "showdown": "^1.9.1",
+    "sqlite3": "^5.0.0",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
