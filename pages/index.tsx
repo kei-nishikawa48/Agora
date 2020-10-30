@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
+import firebase from "../utils/Firebase"
 
 type User = {
   name: string;
@@ -44,7 +45,6 @@ const IndexPage = () => {
       console.log(res);
     }
   };
-
   const handle_click = async () => {
     try {
       const res = await client.query({
@@ -63,6 +63,10 @@ const IndexPage = () => {
     }
   };
 
+  const logout=async()=>{
+    await firebase.auth().signOut()
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(handle_submit)}>
@@ -73,11 +77,10 @@ const IndexPage = () => {
       <ApolloProvider client={client}>
         <Layout title="Home | Next.js + TypeScript Example">
           <h1>Hello Next.js 👋</h1>
-          <p>
             <Link href="/about">
               <a>About</a>
             </Link>
-          </p>
+            <button onClick={logout} >logout</button>
         </Layout>
         <button onClick={handle_click}>get text from graphql</button>
         {users.map((user, i) => (
