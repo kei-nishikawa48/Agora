@@ -13,6 +13,11 @@ import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
 import firebase from '../utils/Firebase';
 import Router from "next/router"
+import styled from 'styled-components';
+
+const Error =styled.p`
+  color:red;
+`
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -83,6 +88,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             新規登録
           </Typography>
+            <Error>{error}</Error>
           <form className={classes.form} onSubmit={handleSubmit(signup_submit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -93,7 +99,7 @@ export default function SignUp() {
                   fullWidth
                   label="お名前"
                 />
-                {errors.name && <p>{errors.name.message}</p>}
+                {errors.name && <Error>{errors.name.message}</Error>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -109,7 +115,7 @@ export default function SignUp() {
                     },
                   })}
                 />
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && <Error>{errors.email.message}</Error>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -127,7 +133,7 @@ export default function SignUp() {
                     },
                   })}
                 />
-                {errors.pass && <p>{errors.pass.message}</p>}
+                {errors.pass && <Error>{errors.pass.message}</Error>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -147,7 +153,7 @@ export default function SignUp() {
                     },
                   })}
                 />
-                {errors.confirm_pass && <p>{errors.confirm_pass.message}</p>}
+                {errors.confirm_pass && <Error>{errors.confirm_pass.message}</Error>}
               </Grid>
             </Grid>
             <Button
