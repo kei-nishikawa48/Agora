@@ -12,8 +12,10 @@ export const user_resolvers: IResolvers<User, ResolverContext> = {
       models.User.create({ name, email, uid }),
     delete_user: async (parent, { id }, { models }) =>
       models.User.destroy({ where: { id } }),
-    update_user: async (parent, { id, name, email }, { models }) =>
-      models.User.update({ name, email }, { where: { id } }),
+    update_user: async (parent, { id, name, email }, { models }) => {
+      models.User.update({ name, email }, { where: { id } });
+      return models.User.findByPk(id);
+    },
   },
   User: {
     articles: async (user, args, { models }) =>

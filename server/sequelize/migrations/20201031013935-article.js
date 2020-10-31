@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         charset: 'utf8mb4',
-        timestamps: false,
+        timestamps: false
       }
     ),
 

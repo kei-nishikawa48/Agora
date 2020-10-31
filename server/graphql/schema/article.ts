@@ -7,9 +7,19 @@ export const article_schema = gql`
   }
 
   extend type Mutation {
-    create_article(text: String!): Article!
+    create_article(
+      title: String!
+      text: String!
+      tags: String!
+      user_id: String!
+    ): Article!
     delete_article(id: ID!): Boolean!
-    update_article(id: ID!,title: String!, text: String!, tags: String!): Article!
+    update_article(
+      id: ID!
+      title: String!
+      text: String!
+      tags: String!
+    ): Article!
   }
 
   type Article {

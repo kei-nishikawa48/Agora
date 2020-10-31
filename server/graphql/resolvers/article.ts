@@ -16,8 +16,10 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
     ) => models.Article.create({ title, text, tags, user_id }),
     delete_article: async (parent, { id }, { models }) =>
       models.Article.destroy({ where: { id } }),
-    update_article: async (parent, { id, title, text, tags }, { models }) =>
-      models.Article.update({ title, text, tags }, { where: { id } }),
+    update_article: async (parent, { id, title, text, tags }, { models }) => {
+      models.Article.update({ title, text, tags }, { where: { id } });
+      return models.Article.findByPk(id);
+    },
   },
 
   Article: {
