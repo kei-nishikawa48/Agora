@@ -8,13 +8,15 @@ export const user_schema = gql`
 
   type Mutation {
     create_user(name: String, email: String): User!
+    delete_user(id: ID!): Boolean
+    update_user(id: ID!, name: String, email: String): User!
   }
 
   type User {
     id: ID!
     name: String!
     email: String!
-    createdAt: String
-    updatedAt: String
+    uid: String!
+    articles: [Article!]
   }
 `;
