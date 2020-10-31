@@ -9,15 +9,15 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
   },
 
   Mutation: {
-    create_article: async (parent, { text, id }, { models }) =>
-      models.Article.create({
-        text,
-        user_id: await models.User.findByPk(id),
-      }),
+    create_article: async (
+      parent,
+      { title, text, tags, user_id },
+      { models }
+    ) => models.Article.create({ title, text, tags, user_id }),
     delete_article: async (parent, { id }, { models }) =>
-      models.Article.destroy({ where: id }),
-    update_article: async (parent, { id, text }, { models }) =>
-      models.Article.update({ text }, { where: id }),
+      models.Article.destroy({ where: { id } }),
+    update_article: async (parent, { id, title, text, tags }, { models }) =>
+      models.Article.update({ title, text, tags }, { where: { id } }),
   },
 
   Article: {

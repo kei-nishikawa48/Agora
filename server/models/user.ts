@@ -1,4 +1,9 @@
-import { Model, DataTypes, HasManyCreateAssociationMixin, Association } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  HasManyCreateAssociationMixin,
+  Association,
+} from 'sequelize';
 import { sequelize } from '../sequelize';
 import Article from './article';
 
@@ -6,9 +11,10 @@ class User extends Model {
   public id!: number;
   public name!: string;
   public email!: string;
+  public uid!: string;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
 
   public readonly articles?: Article[];
 
@@ -16,7 +22,7 @@ class User extends Model {
 
   public static associations: {
     articles: Association<User, Article>;
-  }
+  };
 }
 
 User.init(

@@ -1,20 +1,22 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 export const article_schema = gql`
-  type Query {
+  extend type Query {
     articles: [Article!]!
-    article: (id: ID!): Article!
+    article(id: ID!): Article!
   }
 
-  type Mutation {
+  extend type Mutation {
     create_article(text: String!): Article!
     delete_article(id: ID!): Boolean!
-    update_article(id: ID!, text: String!): Article!
+    update_article(id: ID!,title: String!, text: String!, tags: String!): Article!
   }
 
   type Article {
     id: ID!
+    title: String!
     text: String!
+    tags: String!
     user: User!
   }
 `;
