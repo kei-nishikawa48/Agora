@@ -2,14 +2,16 @@
   "development": {
     "dialect": "sqlite",
     "storage": "./database.sqlite",
-    "logging": false,
-    "define": {
-      "timestamps": false
-    }
+    "logging": false
   },
   "test": {
     "dialect": "sqlite",
     "storage": "./testdatabase.sqlite",
+    "logging": false
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "./database.sqlite",
     "logging": false
   }
 }

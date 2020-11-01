@@ -28,5 +28,6 @@ export const article_schema = gql`
     text: String!
     tags: String!
     user: User!
+    comments: [Comment!]
   }
 `;
