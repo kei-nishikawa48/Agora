@@ -1,5 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
+import { Association, DataTypes, Model } from 'sequelize';
 import { sequelize } from '../sequelize';
+import Comment from './comment';
 
 class Article extends Model {
   public id!: number;
@@ -8,8 +9,14 @@ class Article extends Model {
   public tags!: string;
   public user_id!: number;
 
-  public readonly created_at!: Date;
-  public readonly updated_at!: Date;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+
+  public readonly comments?: Comment[];
+
+  public static associations: {
+    comments: Association<Article, Comment>;
+  };
 }
 
 Article.init(
@@ -30,12 +37,21 @@ Article.init(
     tags: {
       type: DataTypes.STRING,
       allowNull: true,
-    }
+    },
   },
   {
     tableName: 'articles',
     sequelize: sequelize,
   }
 );
+
+Article.hasMany(Comment, {
+  sourceKey: 'id',
+  foreignKey: 'article_id',
+  onDelete: 'cascade',
+  hooks: true,
+  as: 'comments',
+});
+Comment.belongsTo(Article,{foreignKey: 'article_id'});
 
 export default Article;

@@ -18,5 +18,8 @@ export const user_schema = gql`
     email: String!
     uid: String!
     articles: [Article!]
+    comments: [Comment!]
+    createdAt: Date!
+    updatedAt: Date!
   }
 `;

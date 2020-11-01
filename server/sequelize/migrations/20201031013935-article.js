@@ -25,21 +25,25 @@ module.exports = {
         user_id: {
           type: Sequelize.STRING,
           allowNull: false,
+          onDelete: 'CASCADE',
+          references: {
+            model: 'Users',
+            key: 'id',
+          }
         },
-        created_at: {
+        createdAt: {
           type: Sequelize.DATE,
           allowNull: true,
         },
-        updated_at: {
+        updatedAt: {
           type: Sequelize.DATE,
           allowNull: true,
         },
       },
       {
         charset: 'utf8mb4',
-        timestamps: false
       }
     ),
 
-  down: (queryInterface) => queryInterface.dropTable('users'),
+  down: (queryInterface) => queryInterface.dropTable('articles'),
 };

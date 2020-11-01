@@ -1,11 +1,7 @@
-import {
-  Model,
-  DataTypes,
-  HasManyCreateAssociationMixin,
-  Association,
-} from 'sequelize';
+import { Model, DataTypes, Association } from 'sequelize';
 import { sequelize } from '../sequelize';
 import Article from './article';
+import Comment from './comment';
 
 class User extends Model {
   public id!: number;
@@ -13,15 +9,15 @@ class User extends Model {
   public email!: string;
   public uid!: string;
 
-  public readonly created_at!: Date;
-  public readonly updated_at!: Date;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 
   public readonly articles?: Article[];
-
-  public create_article!: HasManyCreateAssociationMixin<Article>;
+  public readonly comments?: Comment[];
 
   public static associations: {
     articles: Association<User, Article>;
+    comments: Association<User, Comment>;
   };
 }
 
@@ -59,6 +55,12 @@ User.hasMany(Article, {
   sourceKey: 'id',
   foreignKey: 'user_id',
   as: 'articles',
+});
+
+User.hasMany(Comment, {
+  sourceKey: 'id',
+  foreignKey: 'user_id',
+  as: 'comments',
 });
 
 export default User;
