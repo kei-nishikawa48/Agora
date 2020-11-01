@@ -17,10 +17,20 @@ module.exports = {
         user_id: {
           type: Sequelize.STRING,
           allowNull: false,
+          onDelete: 'CASCADE',
+          references: {
+            model: 'Users',
+            key: 'id',
+          }
         },
         article_id: {
           type: Sequelize.STRING,
           allowNull: false,
+          onDelete: 'CASCADE',
+          references: {
+            model: 'Articles',
+            key: 'id',
+          }
         },
         createdAt: {
           type: Sequelize.DATE,

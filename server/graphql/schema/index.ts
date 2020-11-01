@@ -4,6 +4,7 @@ import { user_schema } from './user';
 import { comment_schema } from './comment';
 
 const link_schema = gql`
+  scalar Date
   type Query {
     _: Boolean
   }

@@ -24,7 +24,7 @@ export const comment_schema = gql`
     text: String!
     user: User!
     article: Article!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: Date!
+    updatedAt: Date!
   }
 `;
