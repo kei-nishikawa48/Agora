@@ -33,6 +33,7 @@ module.exports = {
         updatedAt: {
           type: Sequelize.DATE,
           allowNull: true,
+          onUpdate : Sequelize.NOW,
         },
       },
       {
