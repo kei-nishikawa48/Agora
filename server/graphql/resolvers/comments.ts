@@ -19,7 +19,7 @@ export const comment_resolvers: IResolvers<Comment, ResolverContext> = {
     },
   },
 
-  comment: {
+  Comment: {
     user: async (comment, args, { models }) =>
       models.User.findByPk(comment.user_id),
     article: async (comment, args, { models }) =>

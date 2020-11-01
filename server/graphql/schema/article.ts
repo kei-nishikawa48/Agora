@@ -29,5 +29,7 @@ export const article_schema = gql`
     tags: String!
     user: User!
     comments: [Comment!]
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 `;

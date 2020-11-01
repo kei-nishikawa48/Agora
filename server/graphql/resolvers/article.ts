@@ -25,5 +25,7 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
   Article: {
     user: async (article, args, { models }) =>
       models.User.findByPk(article.user_id),
+    comments: async (article, args, { models }) =>
+      models.Comment.findAll({ where: { article_id: article.id } }),
   },
 };

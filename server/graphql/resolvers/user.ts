@@ -20,5 +20,7 @@ export const user_resolvers: IResolvers<User, ResolverContext> = {
   User: {
     articles: async (user, args, { models }) =>
       models.Article.findAll({ where: { user_id: user.id } }),
+    comments: async (user, args, { models }) =>
+      models.Comment.findAll({ where: { user_id: user.id } }),
   },
 };
