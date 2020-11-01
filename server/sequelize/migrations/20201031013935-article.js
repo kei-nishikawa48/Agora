@@ -3,26 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable(
-      'users',
+      'articles',
       {
         id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
+        title: {
           type: Sequelize.STRING(250),
-          allowNull: true,
+          allowNull: false,
         },
-        email: {
+        text: {
           type: Sequelize.STRING,
           allowNull: false,
-          validate: {
-            notEmpty: true,
-            isEmail: true,
-          },
         },
-        uid: {
+        tags: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        user_id: {
           type: Sequelize.STRING,
           allowNull: false,
         },
@@ -37,6 +37,7 @@ module.exports = {
       },
       {
         charset: 'utf8mb4',
+        timestamps: false
       }
     ),
 

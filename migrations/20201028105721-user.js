@@ -22,11 +22,11 @@ module.exports = {
             isEmail: true,
           },
         },
-        createdAt: {
+        created_at: {
           type: Sequelize.DATE,
           allowNull: true,
         },
-        updatedAt: {
+        updated_at: {
           type: Sequelize.DATE,
           allowNull: true,
         },
