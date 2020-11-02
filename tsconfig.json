@@ -18,5 +18,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "pages/signup.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "pages/signup.tsx", "client_hooks/users.js", "client_hooks/articles.js"]
 }
