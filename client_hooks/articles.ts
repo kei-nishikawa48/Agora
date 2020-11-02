@@ -1,6 +1,6 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-const GET_ARTICLES = gql`
+export const GET_ARTICLES = gql`
   query {
     articles {
       id
@@ -15,6 +15,15 @@ const GET_ARTICLES = gql`
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const GET_ARTICLE = gql`
+  query get_article($id: ID!) {
+    article(id: $id) {
+      text
+      id
+      title
     }
   }
 `;
@@ -41,10 +50,10 @@ export const DELETE_ARTICLE = gql`
   }
 `;
 
-export function get_articles() {
-  const { loading, data } = useQuery(GET_ARTICLES);
-  if (loading) {
-    return 'loading';
-  }
-  return data;
-}
+// export function get_articles() {
+//   const { loading, data } = useQuery(GET_ARTICLES);
+//   if (loading) {
+//     return 'loading';
+//   }
+//   return data;
+// }

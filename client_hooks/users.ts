@@ -1,6 +1,6 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-const GET_USERS = gql`
+export const GET_USERS = gql`
   query {
     users {
       email
@@ -26,13 +26,25 @@ const GET_USERS = gql`
     }
   }
 `;
-export function get_users() {
-  const { loading, data } = useQuery(GET_USERS);
-  if (loading) {
-    return 'loading';
+
+export const GET_USER = gql`
+  query get_user($id: ID!) {
+    user(id: $id) {
+      id
+      email
+      createdAt
+      updatedAt
+    }
   }
-  return data;
-}
+`;
+
+// export function get_users() {
+//   const { loading, data } = useQuery(GET_USERS);
+//   if (loading) {
+//     return 'loading';
+//   }
+//   return data;
+// }
 
 export const CREATE_USER = gql`
   mutation create_user($uid: String!, $name: String!, $email: String!) {

@@ -1,6 +1,6 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-const GET_COMMENTS = gql`
+export const GET_COMMENTS = gql`
   query {
     comments {
       id
@@ -10,14 +10,23 @@ const GET_COMMENTS = gql`
     }
   }
 `;
-
-export const get_comments = () => {
-  const { loading, data } = useQuery(GET_COMMENTS);
-  if (loading) {
-    return 'loading';
+export const GET_COMMENT = gql`
+  query get_comment($id: ID!) {
+    comment(id: $id) {
+      id
+      text
+      createdAt
+      updatedAt
+    }
   }
-  return data;
-};
+`;
+// export const get_comments = () => {
+//   const { loading, data } = useQuery(GET_COMMENTS);
+//   if (loading) {
+//     return 'loading';
+//   }
+//   return data;
+// };
 
 export const CREATE_COMMENT = gql`
   mutation create_comment(
