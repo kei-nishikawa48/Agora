@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql,useQuery} from '@apollo/client';
 
 export const GET_ARTICLES = gql`
   query {
@@ -7,14 +7,14 @@ export const GET_ARTICLES = gql`
       title
       text
       tags
+      createdAt
+      updatedAt
       comments {
         id
         text
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -50,10 +50,11 @@ export const DELETE_ARTICLE = gql`
   }
 `;
 
-// export function get_articles() {
-//   const { loading, data } = useQuery(GET_ARTICLES);
-//   if (loading) {
-//     return 'loading';
-//   }
-//   return data;
-// }
+export function get_articles() {
+  const { loading, data } = useQuery(GET_ARTICLES);
+  if (loading) {
+    return 'loading';
+  }
+  return data;
+}
+

@@ -1,13 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Post } from '../interfaces';
 
-
-type PostListDetailProps = {
-  item: Post;
-};
-
-const PostListDetail = ({ item: post }: PostListDetailProps) => (
+const PostListDetail = ({ item:post }:any) => (
   <div>
     <h1>Detail for {post.title}</h1>
     <p>ID: {post.id}</p>
