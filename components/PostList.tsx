@@ -1,19 +1,20 @@
 import * as React from 'react';
 import PostListItem from './PostListItem';
-import { Post } from '../interfaces';
+import {get_articles} from "../client_hooks/articles"
 
-type Props = {
-  items: Post[];
-};
 
-const PostList = ({ items }: Props) => (
-  <ul>
-    {items.map((item) => (
+const PostList = () => {
+  const articles =get_articles().articles
+  return(
+
+    <ul>
+    {articles&&articles.map((item:any) => (
       <li key={item.id}>
         <PostListItem data={item} />
       </li>
     ))}
   </ul>
-);
+  )
+};
 
 export default PostList;
