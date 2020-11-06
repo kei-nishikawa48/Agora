@@ -14,7 +14,6 @@ const StaticPropsDetail = ({ item}: Props) => {
   const { data } = useQuery(GET_ARTICLE, {
     variables: { id:router.query.id },
   });
-  {data&&console.log(data.article.title)}
   return (
     <Layout
       title={`${
