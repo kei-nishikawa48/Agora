@@ -4,12 +4,14 @@ import schema from './graphql/schema';
 import { models } from './models';
 import next from 'next';
 import express from 'express';
+import dotenv from 'dotenv';
 
 const port = parseInt(process.env.PORT as string, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();
+dotenv.config();
 
 const start_server = async () => {
   try {
@@ -19,6 +21,10 @@ const start_server = async () => {
       resolvers: resolvers,
       context: async () => ({
         models,
+        jwt: {
+          secret: process.env.JWT_SECRET,
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        },
       }),
     });
     apollo_server.applyMiddleware({ app: server, path: '/graphql' });
