@@ -1,9 +1,13 @@
-import { IResolvers } from 'apollo-server-express';
+import {
+  AuthenticationError,
+  IResolvers,
+  UserInputError,
+} from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import User from '../../models/user';
 import { ResolverContext } from './types';
 
-const createToken = async (user: User, secret: string, expiresIn: string) => {
+const create_token = async (user: User, secret: string, expiresIn: string) => {
   const { id, email } = user;
   return await jwt.sign({ id, email }, secret, { expiresIn });
 };
@@ -22,7 +26,15 @@ export const user_resolvers: IResolvers<User, ResolverContext> = {
     },
     sign_up: async (parent, { name, email, password }, { models, jwt }) => {
       const user = await models.User.create({ name, email, password });
-      return { token: createToken(user, jwt.secret, jwt.expiresIn) };
+      return { token: create_token(user, jwt.secret, jwt.expiresIn) };
+    },
+    sign_in: async (parent, { email, password }, { models, jwt }) => {
+      const user = await models.User.find_by_email(email);
+      if (!user)
+        throw new UserInputError('No user found with this login credentials.');
+      const isValid = await user.validate_password(password);
+      if (!isValid) throw new AuthenticationError('Invalid password.');
+      return { token: create_token(user, jwt.secret, jwt.expiresIn) };
     },
   },
   User: {

@@ -55,7 +55,7 @@ User.init(
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [8, 50],
+        len: [6, 50],
       },
     },
   },

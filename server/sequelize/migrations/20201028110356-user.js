@@ -22,9 +22,13 @@ module.exports = {
             isEmail: true,
           },
         },
-        uid: {
+        password: {
           type: Sequelize.STRING,
           allowNull: false,
+          validate: {
+            notEmpty: true,
+            len: [6, 50],
+          },
         },
         createdAt: {
           type: Sequelize.DATE,
