@@ -6,6 +6,12 @@ import { StylesProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from '../styles/theme';
 import { AuthProvider } from '../context/Auth';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
 
 export default function App({ Component, pageProps }: AppProps) {
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
@@ -15,17 +21,22 @@ export default function App({ Component, pageProps }: AppProps) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }, []);
-
+  const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: 'http://localhost:3000/graphql',
+  });
   return (
     <AuthProvider>
-      <StylesProvider injectFirst>
-        <MaterialUIThemeProvider theme={theme}>
-          <StyledComponentsThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </StyledComponentsThemeProvider>
-        </MaterialUIThemeProvider>
-      </StylesProvider>
+      <ApolloProvider client={client}>
+        <StylesProvider injectFirst>
+          <MaterialUIThemeProvider theme={theme}>
+            <StyledComponentsThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </StyledComponentsThemeProvider>
+          </MaterialUIThemeProvider>
+        </StylesProvider>
+      </ApolloProvider>
     </AuthProvider>
   );
 }

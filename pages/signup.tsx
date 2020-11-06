@@ -14,6 +14,9 @@ import { useForm } from 'react-hook-form';
 import firebase from '../utils/Firebase';
 import Router from "next/router"
 import styled from 'styled-components';
+// import { CREATE_USER } from '../client_hooks/users';
+// import { useMutation } from '@apollo/client';
+
 
 const Error =styled.p`
   color:red;
@@ -75,6 +78,7 @@ export default function SignUp() {
         }
       });
     console.table(data);
+
   };
 
   return (
