@@ -44,6 +44,23 @@ export const CREATE_ARTICLE = gql`
   }
 `;
 
+export const UPDATE_ARTICLE = gql`
+  mutation update_article(
+    $id: ID!
+    $title: String!
+    $tags: String!
+    $text: String!
+  ) {
+    update_article(id: $id, title: $title, tags: $tags, text: $text) {
+      text
+      title
+      id
+      tags
+    }
+  }
+`;
+
+
 export const DELETE_ARTICLE = gql`
   mutation delete_article($id: ID!) {
     delete_article(id: $id)
