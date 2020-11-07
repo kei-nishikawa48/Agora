@@ -9,7 +9,6 @@ export const comment_schema = gql`
   extend type Mutation {
     create_comment(
       text: String!
-      user_id: String!
       article_id: String!
     ): Comment!
     delete_comment(id: ID!): Boolean!

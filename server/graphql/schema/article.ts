@@ -11,7 +11,6 @@ export const article_schema = gql`
       title: String!
       text: String!
       tags: String!
-      user_id: String!
     ): Article!
     delete_article(id: ID!): Boolean!
     update_article(

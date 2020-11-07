@@ -4,11 +4,12 @@ export const user_schema = gql`
   extend type Query {
     users: [User!]
     user(id: ID!): User
+    current_user: User
   }
 
   extend type Mutation {
-    delete_user(id: ID!): Boolean
-    update_user(id: ID!, name: String, email: String): User!
+    delete_user: Boolean
+    update_user(name: String, email: String): User!
     sign_up(name: String!, email: String!, password: String!): Token!
     sign_in(email: String!, password: String!): Token!
   }

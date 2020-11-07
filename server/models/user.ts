@@ -62,7 +62,9 @@ User.init(
   {
     tableName: 'users',
     sequelize: sequelize,
+    // ユーザーのイベント発生時に自動で実行される
     hooks: {
+      // ユーザーの生成時に呼び出される
       beforeCreate: async (user) => {
         user.set('password', await generate_password_hash(user));
       },
@@ -70,19 +72,23 @@ User.init(
   }
 );
 
+// 記事と紐付け
 User.hasMany(Article, {
   sourceKey: 'id',
   foreignKey: 'user_id',
   as: 'articles',
 });
 
+// コメントと紐付け
 User.hasMany(Comment, {
   sourceKey: 'id',
   foreignKey: 'user_id',
   as: 'comments',
 });
 
+// メールアドレスからユーザーを取得
 User.find_by_email = async (email: string) => User.findOne({ where: { email } });
+// ユーザーのパスワードと入力されたパスワードを比較
 User.prototype.validate_password = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
