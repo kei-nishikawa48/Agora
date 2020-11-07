@@ -8,8 +8,8 @@ export const user_schema = gql`
   }
 
   extend type Mutation {
-    delete_user: Boolean
-    update_user(name: String, email: String): User!
+    delete_user: Boolean!
+    update_user(name: String!, password: String!): User!
     sign_up(name: String!, email: String!, password: String!): Token!
     sign_in(email: String!, password: String!): Token!
   }

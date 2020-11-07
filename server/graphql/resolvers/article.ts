@@ -17,7 +17,9 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
       { title, text, tags },
       { models, current_user }
     ) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       return models.Article.create({
         title,
         text,
@@ -27,7 +29,9 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
     },
     /** 記事削除 */
     delete_article: async (parent, { id }, { models, current_user }) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       return models.Article.destroy({ where: { id } });
     },
     /** 記事更新 */
@@ -36,7 +40,9 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
       { id, title, text, tags },
       { models, current_user }
     ) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       models.Article.update({ title, text, tags }, { where: { id } });
       return models.Article.findByPk(id);
     },
@@ -46,7 +52,7 @@ export const article_resolvers: IResolvers<Article, ResolverContext> = {
     /** 記事からユーザーにアクセス */
     user: async (article, args, { models }) =>
       models.User.findByPk(article.user_id),
-      /** 記事からコメントにアクセス */
+    /** 記事からコメントにアクセス */
     comments: async (article, args, { models }) =>
       models.Comment.findAll({ where: { article_id: article.id } }),
   },

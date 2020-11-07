@@ -1,9 +1,4 @@
-import {
-  AuthenticationError,
-  ForbiddenError,
-  IResolvers,
-  UserInputError,
-} from 'apollo-server-express';
+import { ForbiddenError, IResolvers } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import User from '../../models/user';
 import { ResolverContext } from './types';
@@ -26,22 +21,32 @@ export const user_resolvers: IResolvers<User, ResolverContext> = {
   },
   Mutation: {
     /** ユーザー削除 */
-    delete_user: async (parent, { id }, { models, current_user }) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+    delete_user: async (parent, args, { models, current_user }) => {
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       return models.User.destroy({ where: { id: current_user!.id } });
     },
     /** ユーザー更新 */
     update_user: async (
       parent,
-      { id, name, email },
+      { name, password },
       { models, current_user }
     ) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
-      models.User.update({ name, email }, { where: { id: current_user!.id } });
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
+      models.User.update(
+        { name, password },
+        { where: { id: current_user!.id } }
+      );
       return models.User.findByPk(current_user!.id);
     },
     /** サインアップ */
     sign_up: async (parent, { name, email, password }, { models, jwt }) => {
+      if (await models.User.find_by_email(email)) {
+        return new ForbiddenError('This email is already existed.');
+      }
       const user = await models.User.create({ name, email, password });
       return { token: create_token(user, jwt.secret, jwt.expiresIn) };
     },
@@ -49,9 +54,9 @@ export const user_resolvers: IResolvers<User, ResolverContext> = {
     sign_in: async (parent, { email, password }, { models, jwt }) => {
       const user = await models.User.find_by_email(email);
       if (!user)
-        throw new UserInputError('No user found with this login credentials.');
+        throw new ForbiddenError('No user found with this login credentials.');
       const is_valid = await user.validate_password(password);
-      if (!is_valid) throw new AuthenticationError('Invalid password.');
+      if (!is_valid) throw new ForbiddenError('Invalid password.');
       return { token: create_token(user, jwt.secret, jwt.expiresIn) };
     },
   },
