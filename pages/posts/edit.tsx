@@ -14,17 +14,18 @@ export default function Form() {
   const [value, set_value] = React.useState('');
   const router = useRouter();
   const pathname = router.asPath;
+  console.log(pathname);
   const end = pathname.indexOf('/edit');
   const articleid = pathname.slice(7, end);
   const { data } = useQuery(GET_ARTICLE, {
     variables: { id: articleid },
-    onCompleted:()=>{
+    onCompleted: () => {
       set_value(data.article.text);
-    }
+    },
   });
 
   const { register, handleSubmit, errors } = useForm();
-  const [update_article, data1={ data }] = useMutation(UPDATE_ARTICLE);
+  const [update_article] = useMutation(UPDATE_ARTICLE);
   const submit = (articledata: any) => {
     update_article({
       variables: {
@@ -49,10 +50,10 @@ export default function Form() {
         {errors.title && <p>タイトルを入力してください</p>}
         <Button>タグ追加</Button>
         <ChipsArray />
-      <Page>
-        {data && <MarkdownEditor value={value} set_value={set_value} />}
-      </Page>
-      <Button type="submit">追加</Button>
+        <Page>
+          {data && <MarkdownEditor value={value} set_value={set_value} />}
+        </Page>
+        <Button type="submit">追加</Button>
       </form>
     </Layout>
   );
