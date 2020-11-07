@@ -11,16 +11,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
-import firebase from '../utils/Firebase';
-import Router from "next/router"
+// import firebase from '../utils/Firebase';
+// import Router from "next/router"
 import styled from 'styled-components';
-// import { CREATE_USER } from '../client_hooks/users';
-// import { useMutation } from '@apollo/client';
+import { SIGN_UP } from '../client_hooks/users';
+import { useMutation } from '@apollo/client';
 
-
-const Error =styled.p`
-  color:red;
-`
+const Error = styled.p`
+  color: red;
+`;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,6 +49,7 @@ interface Data {
 }
 
 export default function SignUp() {
+  const [sign_up] = useMutation(SIGN_UP);
   const [error, setError] = React.useState('');
   const classes = useStyles();
   const { register, handleSubmit, errors, getValues } = useForm<Data>();
@@ -60,25 +60,32 @@ export default function SignUp() {
     '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
   );
   const signup_submit = async (data: Data) => {
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(data.email, data.pass)
-      .then(({ user }) => {
-        user!.updateProfile({
-          displayName: data.name,
-        });
-        Router.push("/")
-      })
-      .catch((er) => {
-        switch (er.code) {
-          case 'auth/email-already-in-use':
-            setError('このemailはすでに使用されています');
-            break;
-          default:
-        }
-      });
-    console.table(data);
+    // await firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword(data.email, data.pass)
+    //   .then(({ user }) => {
+    //     user!.updateProfile({
+    //       displayName: data.name,
+    //     });
+    //     Router.push("/")
+    //   })
+    //   .catch((er) => {
+    //     switch (er.code) {
+    //       case 'auth/email-already-in-use':
+    //         setError('このemailはすでに使用されています');
+    //         break;
+    //       default:
+    //     }
+    //   });
 
+    sign_up({
+      variables: {
+        name: data.name,
+        email: data.email,
+        password: data.pass,
+      },
+    });
+    // console.table(data);
   };
 
   return (
@@ -92,7 +99,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             新規登録
           </Typography>
-            <Error>{error}</Error>
+          <Error>{error}</Error>
           <form className={classes.form} onSubmit={handleSubmit(signup_submit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -157,7 +164,9 @@ export default function SignUp() {
                     },
                   })}
                 />
-                {errors.confirm_pass && <Error>{errors.confirm_pass.message}</Error>}
+                {errors.confirm_pass && (
+                  <Error>{errors.confirm_pass.message}</Error>
+                )}
               </Grid>
             </Grid>
             <Button

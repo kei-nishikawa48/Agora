@@ -46,13 +46,18 @@ export const GET_USER = gql`
 //   return data;
 // }
 
-export const CREATE_USER = gql`
-  mutation create_user($uid: String!, $name: String!, $email: String!) {
-    create_user(uid: $uid, name: $name, email: $email) {
-      name
-      email
-      id
-      uid
+export const SIGN_UP = gql`
+  mutation signup($email: String!, $password: String!, $name: String!) {
+    sign_up(email: $email, password: $password, name: $name) {
+      token
+    }
+  }
+`;
+
+export const SIGN_IN = gql`
+  mutation signin($email: String!, $password: String!) {
+    sign_in(email: $email, password: $password) {
+      token
     }
   }
 `;

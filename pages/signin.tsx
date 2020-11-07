@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import Router from 'next/router';
-import firebase from '../utils/Firebase';
+// import firebase from '../utils/Firebase';
 import { AuthContext } from '../context/Auth';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,6 +17,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
+import { SIGN_IN } from '../client_hooks/users';
+import { useMutation } from '@apollo/client';
 
 function Copyright() {
   return (
@@ -52,6 +54,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const [sign_in, { data }] = useMutation(SIGN_IN, {
+    onCompleted: () => {
+      console.log(data);
+    },
+  });
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
@@ -64,7 +71,13 @@ export default function SignIn() {
     password: string;
   }
   const login = (data: data) => {
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+    // firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+    sign_in({
+      variables: {
+        email: data.email,
+        password: data.password,
+      },
+    });
   };
   return (
     <Layout>
