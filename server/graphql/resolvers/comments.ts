@@ -17,7 +17,9 @@ export const comment_resolvers: IResolvers<Comment, ResolverContext> = {
       { text, article_id },
       { models, current_user }
     ) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       return models.Comment.create({
         text,
         article_id,
@@ -26,12 +28,16 @@ export const comment_resolvers: IResolvers<Comment, ResolverContext> = {
     },
     /** コメント削除 */
     delete_comment: async (parent, { id }, { models, current_user }) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       return models.Comment.destroy({ where: { id } });
     },
     /** コメント更新 */
     update_comment: async (parent, { id, text }, { models, current_user }) => {
-      !current_user && new ForbiddenError('Not authenticated as user.');
+      if (!current_user) {
+        return new ForbiddenError('Not authenticated as user.');
+      }
       models.Comment.update({ text }, { where: { id } });
       return models.Comment.findByPk(id);
     },
