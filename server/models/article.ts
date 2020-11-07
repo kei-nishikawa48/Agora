@@ -45,6 +45,7 @@ Article.init(
   }
 );
 
+// コメントと紐付け
 Article.hasMany(Comment, {
   sourceKey: 'id',
   foreignKey: 'article_id',
@@ -52,6 +53,5 @@ Article.hasMany(Comment, {
   hooks: true,
   as: 'comments',
 });
-Comment.belongsTo(Article,{foreignKey: 'article_id'});
 
 export default Article;
