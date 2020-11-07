@@ -15,7 +15,6 @@ export default function Form() {
   const submit = async (detail: any) => {
     await create_article({
       variables: {
-        user_id: '1',
         title: detail.title,
         tags: detail.title,
         text: value,

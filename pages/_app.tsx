@@ -8,12 +8,20 @@ import { theme } from '../styles/theme';
 import { AuthProvider } from '../context/Auth';
 import {
   ApolloClient,
+  createHttpLink,
   ApolloProvider,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { useCookies, CookiesProvider } from 'react-cookie';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [cookies] = useCookies(['token']);
+  const httpLink = createHttpLink({
+    uri: 'http://localhost:3000/graphql',
+  });
+
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
@@ -21,22 +29,37 @@ export default function App({ Component, pageProps }: AppProps) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }, []);
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = cookies['token'];
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? token : '',
+      },
+    };
+  });
+
   const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
-    uri: 'http://localhost:3000/graphql',
   });
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <StylesProvider injectFirst>
-          <MaterialUIThemeProvider theme={theme}>
-            <StyledComponentsThemeProvider theme={theme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </StyledComponentsThemeProvider>
-          </MaterialUIThemeProvider>
-        </StylesProvider>
-      </ApolloProvider>
-    </AuthProvider>
+    <CookiesProvider>
+      <AuthProvider>
+        <ApolloProvider client={client}>
+          <StylesProvider injectFirst>
+            <MaterialUIThemeProvider theme={theme}>
+              <StyledComponentsThemeProvider theme={theme}>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </StyledComponentsThemeProvider>
+            </MaterialUIThemeProvider>
+          </StylesProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </CookiesProvider>
   );
 }

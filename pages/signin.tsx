@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
 import Router from 'next/router';
-// import firebase from '../utils/Firebase';
 import { AuthContext } from '../context/Auth';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -19,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
 import { SIGN_IN } from '../client_hooks/users';
 import { useMutation } from '@apollo/client';
-
+import { useCookies } from 'react-cookie';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -54,11 +53,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  const [sign_in, { data }] = useMutation(SIGN_IN, {
-    onCompleted: () => {
-      console.log(data);
+  const [cookies, setCookie] = useCookies(['token']);
+  console.log(cookies);
+  const [sign_in] = useMutation(SIGN_IN, {
+    update: (_proxy, response) => {
+      if (response.data.sign_in) {
+        console.log(response.data.sign_in);
+        setCookie('token', response.data.sign_in.token);
+      } else {
+        alert('ログイン情報が不正です。');
+      }
     },
   });
+
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
@@ -71,7 +78,6 @@ export default function SignIn() {
     password: string;
   }
   const login = (data: data) => {
-    // firebase.auth().signInWithEmailAndPassword(data.email, data.password);
     sign_in({
       variables: {
         email: data.email,

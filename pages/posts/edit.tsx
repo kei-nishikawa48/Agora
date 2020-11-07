@@ -14,6 +14,7 @@ export default function Form() {
   const [value, set_value] = React.useState('');
   const router = useRouter();
   const pathname = router.asPath;
+  console.log(pathname);
   const end = pathname.indexOf('/edit');
   const articleid = pathname.slice(7, end);
   const { data } = useQuery(GET_ARTICLE, {

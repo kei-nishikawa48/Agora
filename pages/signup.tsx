@@ -11,11 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
-// import firebase from '../utils/Firebase';
-// import Router from "next/router"
 import styled from 'styled-components';
 import { SIGN_UP } from '../client_hooks/users';
 import { useMutation } from '@apollo/client';
+import { useCookies } from 'react-cookie';
 
 const Error = styled.p`
   color: red;
@@ -49,35 +48,28 @@ interface Data {
 }
 
 export default function SignUp() {
-  const [sign_up] = useMutation(SIGN_UP);
-  const [error, setError] = React.useState('');
+  const [cookies, setCookie] = useCookies(['token']);
+  const [sign_up] = useMutation(SIGN_UP, {
+    update: (_proxy, response) => {
+      if (response.data.sign_up) {
+        console.log(response.data.sign_up);
+        setCookie('token', response.data.sign_up.token);
+      } else {
+        alert('サインアップが失敗しました。');
+      }
+    },
+  });
   const classes = useStyles();
   const { register, handleSubmit, errors, getValues } = useForm<Data>();
-  const emailReg = new RegExp(
-    '^([a-zA-Z0-9])+([a-zA-Z0-9_-])*@([a-zA-Z0-9._-])+([a-zA-Z0-9._-]+)+$'
-  );
-  const passReg = new RegExp(
-    '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
-  );
-  const signup_submit = async (data: Data) => {
-    // await firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(data.email, data.pass)
-    //   .then(({ user }) => {
-    //     user!.updateProfile({
-    //       displayName: data.name,
-    //     });
-    //     Router.push("/")
-    //   })
-    //   .catch((er) => {
-    //     switch (er.code) {
-    //       case 'auth/email-already-in-use':
-    //         setError('このemailはすでに使用されています');
-    //         break;
-    //       default:
-    //     }
-    //   });
 
+  // パスワード認証めんどくさいのでコメントアウト
+  // const emailReg = new RegExp(
+  //   '^([a-zA-Z0-9])+([a-zA-Z0-9_-])*@([a-zA-Z0-9._-])+([a-zA-Z0-9._-]+)+$'
+  // );
+  // const passReg = new RegExp(
+  //   '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
+  // );
+  const signup_submit = async (data: Data) => {
     sign_up({
       variables: {
         name: data.name,
@@ -85,7 +77,6 @@ export default function SignUp() {
         password: data.pass,
       },
     });
-    // console.table(data);
   };
 
   return (
@@ -99,7 +90,6 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             新規登録
           </Typography>
-          <Error>{error}</Error>
           <form className={classes.form} onSubmit={handleSubmit(signup_submit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -120,10 +110,10 @@ export default function SignUp() {
                   name="email"
                   inputRef={register({
                     required: 'メールアドレス入力してください',
-                    pattern: {
-                      value: emailReg,
-                      message: '正しいメールアドレスを入力してください',
-                    },
+                    // pattern: {
+                    //   value: emailReg,
+                    //   message: '正しいメールアドレスを入力してください',
+                    // },
                   })}
                 />
                 {errors.email && <Error>{errors.email.message}</Error>}
@@ -137,11 +127,11 @@ export default function SignUp() {
                   type="password"
                   inputRef={register({
                     required: 'パスワードを入力してください',
-                    pattern: {
-                      value: passReg,
-                      message:
-                        'パスワードは6文字以上かつ１つの小文字と１つの大文字のアルファベット文字、１つの英数字を含む必要性があります。',
-                    },
+                    // pattern: {
+                    //   value: passReg,
+                    //   message:
+                    //     'パスワードは6文字以上かつ１つの小文字と１つの大文字のアルファベット文字、１つの英数字を含む必要性があります。',
+                    // },
                   })}
                 />
                 {errors.pass && <Error>{errors.pass.message}</Error>}
