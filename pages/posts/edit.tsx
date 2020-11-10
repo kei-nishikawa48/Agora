@@ -26,7 +26,7 @@ export default function Form() {
 
   const { register, handleSubmit, errors } = useForm();
   const [update_article] = useMutation(UPDATE_ARTICLE);
-  const submit = (articledata: any) => {
+  const submit = (articledata: { title: string }) => {
     update_article({
       variables: {
         id: articleid,
