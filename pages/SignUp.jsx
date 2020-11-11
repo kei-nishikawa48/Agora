@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import styled from 'styled-components'
 
 function Copyright() {
     return (
@@ -19,7 +20,7 @@ function Copyright() {
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Your Website
-      </Link>{' '}
+            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -28,7 +29,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        paddingTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -50,74 +51,101 @@ export default function SignUp() {
     const classes = useStyles();
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    新規登録
-        </Typography>
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="fname"
-                                name="お名前"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="お名前"
-                                autoFocus
-                            />
+        <div style= {{backgroundColor: `#4527A0`}}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                    <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography
+                        component="h1" 
+                        variant="h5"
+                        style= {{color: `white`}}
+                        >
+                        Proshare
+                    </Typography>
+                    <form className={classes.form} noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    style= {{backgroundColor: `white`}}
+                                    autoComplete="fname"
+                                    name="お名前"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="お名前"
+                                    autoFocus
+                                    />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    style= {{backgroundColor: `white`}}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="メールアドレス"
+                                    name="email"
+                                    autoComplete="email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    style= {{backgroundColor: `white`}}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="パスワード"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    style= {{backgroundColor: `white`}}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="パスワード"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="メールアドレス"
-                                name="email"
-                                autoComplete="email"
-                            />
+                        <Button
+                            style= {{backgroundColor: `EDE7F6`}}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="black"
+                            className={classes.submit}
+                            >
+                            この内容で新規登録
+                        </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link 
+                                    href="#" 
+                                    variant="body2"
+                                    style= {{color: `white`}}
+                                    >
+                                    もうすでにアカウントをお持ちですか？ サインイン
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="パスワード"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                        </Grid>
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        この内容で新規登録
-          </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                もうすでにアカウントをお持ちですか？ サインイン
-              </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-        </Container>
+                    </form>
+                </div>
+                <Box mt={5}>
+                    <Copyright />
+                </Box>
+            </Container>
+        </div>
     );
 }
