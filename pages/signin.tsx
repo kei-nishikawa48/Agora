@@ -54,11 +54,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const [cookies, setCookie] = useCookies(['token']);
-  console.log(cookies);
   const [sign_in] = useMutation(SIGN_IN, {
     update: (_proxy, response) => {
       if (response.data.sign_in) {
-        console.log(response.data.sign_in);
         setCookie('token', response.data.sign_in.token);
       } else {
         alert('ログイン情報が不正です。');
