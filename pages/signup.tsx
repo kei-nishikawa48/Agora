@@ -48,7 +48,7 @@ interface Data {
 }
 
 export default function SignUp() {
-  const [cookies, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies(['token']);
   const [sign_up] = useMutation(SIGN_UP, {
     update: (_proxy, response) => {
       if (response.data.sign_up) {
