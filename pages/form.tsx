@@ -8,11 +8,13 @@ import { useForm } from 'react-hook-form';
 import ChipsArray from '../components/Tags';
 import { CREATE_ARTICLE } from '../client_hooks/articles';
 import { useMutation } from '@apollo/client';
+
+type Detail = { title: string; tags: string; text: string };
 export default function Form() {
   const [value, set_value] = React.useState(``);
   const { register, handleSubmit, errors } = useForm();
   const [create_article] = useMutation(CREATE_ARTICLE);
-  const submit = async (detail: any) => {
+  const submit = async (detail: Detail) => {
     await create_article({
       variables: {
         title: detail.title,
