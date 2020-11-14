@@ -15,7 +15,7 @@ const PostList = () => {
   }
   )
   const [delete_article] = useMutation(DELETE_ARTICLE);
-  const deleteart=(deleteid:string)=>{
+  const deletearticle=(deleteid:string)=>{
     delete_article({variables:{
       id:deleteid
     }})
@@ -24,14 +24,15 @@ const PostList = () => {
   return(
 
     <ul>
-    {articles&&articles.map((item:any) => (
-      <li key={item.id}>
+    {articles&&articles.map((item:any) => {
+      console.log(item)
+        return(<li key={item.id}>
         <PostListItem data={item} />
         <Button onClick={()=>
-          deleteart(item.id)
+          deletearticle(item.id)
           }>delete</Button>
       </li>
-    ))}
+    )})}
   </ul>
   )
 };
