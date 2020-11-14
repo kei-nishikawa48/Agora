@@ -5,10 +5,9 @@ import { GET_USERS } from '../client_hooks/users';
 import { useCookies } from 'react-cookie';
 
 const IndexPage = () => {
-  const [cookies, set_cookie, removeCookie] = useCookies(['token']);
+  const [, , removeCookie] = useCookies(['token']);
   const { data } = useQuery(GET_USERS);
   data && console.log(data);
-
   const logout = async () => {
     removeCookie('token');
   };

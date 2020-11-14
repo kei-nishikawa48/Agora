@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  const [cookies, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies(['token']);
   const [sign_in] = useMutation(SIGN_IN, {
     update: (_proxy, response) => {
       if (response.data.sign_in) {

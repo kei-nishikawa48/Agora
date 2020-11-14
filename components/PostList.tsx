@@ -4,10 +4,18 @@ import { GET_ARTICLES } from '../client_hooks/articles';
 import Button from '@material-ui/core/Button';
 import {DELETE_ARTICLE} from "../client_hooks/articles"
 import {useMutation,useQuery } from '@apollo/client';
+type article ={
+      id: number;
+      title: string;
+      text: string;
+}
+
+  type articles=  article[] 
+
 
 
 const PostList = () => {
-  const [articles,set_articles]=React.useState<any>()
+  const [articles,set_articles]=React.useState<articles>()
   const { data } = useQuery(GET_ARTICLES,{
     onCompleted:()=>{
       set_articles(data.articles)
@@ -15,17 +23,16 @@ const PostList = () => {
   }
   )
   const [delete_article] = useMutation(DELETE_ARTICLE);
-  const deletearticle=(deleteid:string)=>{
+  const deletearticle=(deleteid:number)=>{
     delete_article({variables:{
       id:deleteid
     }})
-    set_articles(articles.filter((articles:any)=>deleteid !==articles.id))
+    set_articles(articles?.filter((article:article)=>deleteid !==article.id))
   }
   return(
 
     <ul>
     {articles&&articles.map((item:any) => {
-      console.log(item)
         return(<li key={item.id}>
         <PostListItem data={item} />
         <Button onClick={()=>
