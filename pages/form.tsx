@@ -14,7 +14,11 @@ import Router from 'next/router';
 type Detail = { title: string; tags: string; text: string };
 export default function Form() {
   const [cookies] = useCookies(['token']);
-  !Object.keys(cookies).length && Router.push('/signin');
+
+  React.useEffect(() => {
+    !Object.keys(cookies).length && Router.push('/signin');
+  }, [cookies]);
+
   const [value, set_value] = React.useState(``);
   const { register, handleSubmit, errors } = useForm();
   const [create_article] = useMutation(CREATE_ARTICLE);
