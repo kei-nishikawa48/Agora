@@ -14,7 +14,7 @@ import Router from 'next/router';
 type Detail = { title: string; tags: string; text: string };
 export default function Form() {
   const [cookies] = useCookies(['token']);
-
+  console.log(cookies);
   React.useEffect(() => {
     !Object.keys(cookies).length && Router.push('/signin');
   }, [cookies]);
