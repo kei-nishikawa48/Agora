@@ -2,19 +2,23 @@ import Button from '@material-ui/core/Button';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import styled from 'styled-components';
 import React from 'react';
-import { MarkdownEditor } from '../../components/MarkdownEditor';
-import Layout from '../../components/Layout';
+import { MarkdownEditor } from '../../../components/MarkdownEditor';
+import Layout from '../../../components/Layout';
 import { useForm } from 'react-hook-form';
-import ChipsArray from '../../components/Tags';
+import ChipsArray from '../../../components/Tags';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ARTICLE, UPDATE_ARTICLE } from '../../client_hooks/articles';
+import { GET_ARTICLE, UPDATE_ARTICLE } from '../../../client_hooks/articles';
 import { useRouter } from 'next/router';
+import {useCookies} from "react-cookie"
 
 export default function Form() {
-  const [value, set_value] = React.useState('');
+  const [cookies] = useCookies(['token']);
   const router = useRouter();
+  React.useEffect(() => {
+    !Object.keys(cookies).length && router.push('/signin');
+  }, [cookies]);
+  const [value, set_value] = React.useState('');
   const pathname = router.asPath;
-  console.log(pathname);
   const end = pathname.indexOf('/edit');
   const articleid = pathname.slice(7, end);
   const { data } = useQuery(GET_ARTICLE, {
@@ -24,17 +28,30 @@ export default function Form() {
     },
   });
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [update_article] = useMutation(UPDATE_ARTICLE);
   const submit = (articledata: { title: string }) => {
-    update_article({
-      variables: {
-        id: articleid,
-        title: articledata.title,
-        text: value,
-        tags: 'test',
-      },
-    });
+    if (!articledata.title) {
+      const title = data.article.title;
+      update_article({
+        variables: {
+          id: articleid,
+          title: title,
+          text: value,
+          tags: 'test',
+        },
+      });
+    } else {
+      const title = articledata.title;
+      update_article({
+        variables: {
+          id: articleid,
+          title: title,
+          text: value,
+          tags: 'test',
+        },
+      });
+    }
   };
   return (
     <Layout>
@@ -42,12 +59,10 @@ export default function Form() {
         {data && (
           <input
             name="title"
-            placeholder="タイトル"
-            value={data && data.article.title}
-            ref={register({ required: true })}
+            placeholder={data && data.article.title}
+            ref={register}
           />
         )}
-        {errors.title && <p>タイトルを入力してください</p>}
         <Button>タグ追加</Button>
         <ChipsArray />
         <Page>

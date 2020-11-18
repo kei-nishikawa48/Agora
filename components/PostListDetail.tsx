@@ -11,7 +11,7 @@ const PostListDetail = ({ item }: Props) => (
     <h1>Detail for {item.title}</h1>
     <p>ID: {item.id}</p>
     <Markdown value={item.text} />
-    <Link href="/posts/edit" as={`/posts/${item.id}/edit`}>
+    <Link href="/posts/[id]/edit" as={`/posts/${item.id}/edit`}>
       <button>編集</button>
     </Link>
     {/* <button>削除</button> */}

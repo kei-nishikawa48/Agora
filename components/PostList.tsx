@@ -14,21 +14,26 @@ type Articles = Article[] | undefined;
 
 const PostList = () => {
   const [articles, set_articles] = React.useState<Articles>();
-  const { data } = useQuery(GET_ARTICLES, {
+  const { data } = useQuery(GET_ARTICLES,  {
     onCompleted: () => {
       set_articles(data.articles);
     },
   });
   const [delete_article] = useMutation(DELETE_ARTICLE);
-  const deletearticle = (deleteid: number) => {
-    delete_article({
-      variables: {
-        id: deleteid,
-      },
-    });
-    set_articles(
-      articles?.filter((article: Article) => deleteid !== article.id)
-    );
+  const deletearticle = async (deleteid: number) => {
+    try{
+      await delete_article({
+        variables: {
+          id: deleteid,
+        },
+      });
+      set_articles(
+        articles?.filter((article: Article) => deleteid !== article.id)
+      );
+    }
+    catch(er){
+      console.log(er)
+    }
   };
   return (
     <ul>
