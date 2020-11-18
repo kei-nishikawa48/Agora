@@ -5,7 +5,6 @@ import { ThemeProvider as MaterialUIThemeProvider } from '@material-ui/core/styl
 import { StylesProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from '../styles/theme';
-import { AuthProvider } from '../context/Auth';
 import {
   ApolloClient,
   createHttpLink,
@@ -30,7 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  const authLink = setContext((_, { headers }) => {
+  const authLink = setContext(async (_, { headers }) => {
+
     // get the authentication token from local storage if it exists
     const token = cookies['token'];
     // return the headers to the context so httpLink can read them
@@ -48,7 +48,6 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <CookiesProvider>
-      <AuthProvider>
         <ApolloProvider client={client}>
           <StylesProvider injectFirst>
             <MaterialUIThemeProvider theme={theme}>
@@ -59,7 +58,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </MaterialUIThemeProvider>
           </StylesProvider>
         </ApolloProvider>
-      </AuthProvider>
     </CookiesProvider>
   );
 }

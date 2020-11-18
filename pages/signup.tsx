@@ -70,13 +70,18 @@ export default function SignUp() {
   //   '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
   // );
   const signup_submit = async (data: Data) => {
-    sign_up({
-      variables: {
-        name: data.name,
-        email: data.email,
-        password: data.pass,
-      },
-    });
+    try{
+      await sign_up({
+        variables: {
+          name: data.name,
+          email: data.email,
+          password: data.pass,
+        },
+      });
+    }
+    catch(er){
+      console.log(er)
+    }
   };
 
   return (

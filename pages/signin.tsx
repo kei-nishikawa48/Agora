@@ -1,6 +1,5 @@
-import { useEffect, useContext } from 'react';
+import { useEffect} from 'react';
 import Router from 'next/router';
-import { AuthContext } from '../context/Auth';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -66,25 +65,28 @@ export default function SignIn() {
       }
     },
   });
+  
+
 
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
-  const { currentUser } = useContext(AuthContext);
-  useEffect(() => {
-    currentUser && Router.push('/');
-  }, [currentUser]);
 
   interface data {
     email: string;
     password: string;
   }
   const login = (data: data) => {
-    sign_in({
-      variables: {
-        email: data.email,
-        password: data.password,
-      },
-    });
+    try{
+      sign_in({
+        variables: {
+          email: data.email,
+          password: data.password,
+        },
+      });
+    }
+    catch(er){
+      console.log(er)
+    }
   };
   return (
     <Layout>

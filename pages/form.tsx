@@ -22,18 +22,24 @@ export default function Form() {
   const { register, handleSubmit, errors } = useForm();
   const [create_article] = useMutation(CREATE_ARTICLE);
   const submit = async (detail: Detail) => {
-    await create_article({
-      variables: {
-        title: detail.title,
-        tags: detail.title,
-        text: value,
-      },
-    });
+    try{
+      await create_article({
+        variables: {
+          title: detail.title,
+          tags: detail.title,
+          text: value,
+        },
+      });
+    }
+    catch(er){
+      console.log(er)
+    }
   };
   return (
     <Layout>
       <form onSubmit={handleSubmit(submit)}>
         <input
+          type="text"
           name="title"
           placeholder="タイトル"
           ref={register({ required: true })}
