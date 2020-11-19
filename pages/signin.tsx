@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const [cookies, setCookie] = useCookies(['token']);
   useEffect(() => {
-    Object.keys(cookies).length && Router.push('/');
+    cookies['token'] && Router.push('/');
   }, [cookies]);
   const [sign_in] = useMutation(SIGN_IN, {
     update: (_proxy, response) => {
@@ -65,8 +65,6 @@ export default function SignIn() {
       }
     },
   });
-  
-
 
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
@@ -75,17 +73,17 @@ export default function SignIn() {
     email: string;
     password: string;
   }
-  const login = (data: data) => {
-    try{
-      sign_in({
+  const login = async (data: data) => {
+    try {
+      await sign_in({
         variables: {
           email: data.email,
           password: data.password,
         },
       });
-    }
-    catch(er){
-      console.log(er)
+      location.replace('/');
+    } catch (er) {
+      console.log(er);
     }
   };
   return (
@@ -148,7 +146,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

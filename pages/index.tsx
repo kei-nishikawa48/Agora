@@ -9,7 +9,8 @@ const IndexPage = () => {
   const { data } = useQuery(GET_CURRENT_USER);
   data && console.log(data);
   const logout = async () => {
-    await　removeCookie('token');
+    await removeCookie('token');
+    location.replace('/signin');
   };
   return (
     <Layout title="Home | Next.js + TypeScript Example">
