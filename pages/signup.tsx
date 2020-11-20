@@ -80,104 +80,114 @@ export default function SignUp() {
   };
 
   return (
-    <Layout>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            新規登録
-          </Typography>
-          <form className={classes.form} onSubmit={handleSubmit(signup_submit)}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="name"
-                  variant="outlined"
-                  inputRef={register({ required: '名前を入力してください' })}
-                  fullWidth
-                  label="お名前"
-                />
-                {errors.name && <Error>{errors.name.message}</Error>}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  label="メールアドレス"
-                  name="email"
-                  inputRef={register({
-                    required: 'メールアドレス入力してください',
-                    // pattern: {
-                    //   value: emailReg,
-                    //   message: '正しいメールアドレスを入力してください',
-                    // },
-                  })}
-                />
-                {errors.email && <Error>{errors.email.message}</Error>}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  name="pass"
-                  label="パスワード"
-                  type="password"
-                  inputRef={register({
-                    required: 'パスワードを入力してください',
-                    // pattern: {
-                    //   value: passReg,
-                    //   message:
-                    //     'パスワードは6文字以上かつ１つの小文字と１つの大文字のアルファベット文字、１つの英数字を含む必要性があります。',
-                    // },
-                  })}
-                />
-                {errors.pass && <Error>{errors.pass.message}</Error>}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  name="confirm_pass"
-                  label="確認用パスワード"
-                  type="password"
-                  inputRef={register({
-                    required: '確認用パスワードを入力してください',
-                    validate: (value) => {
-                      if (value === getValues()['pass']) {
-                        return true;
-                      } else {
-                        return 'パスワードと一致しません';
-                      }
-                    },
-                  })}
-                />
-                {errors.confirm_pass && (
-                  <Error>{errors.confirm_pass.message}</Error>
-                )}
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+    <div style={{ backgroundColor: '#4527A0' }}>
+      <Layout>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
+              Proshare
+            </Typography>
+            <form
+              className={classes.form}
+              onSubmit={handleSubmit(signup_submit)}
             >
-              新規登録
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  もうすでにアカウントをお持ちですか？ サインイン
-                </Link>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ backgroundColor: '#fff' }}
+                    name="name"
+                    variant="outlined"
+                    inputRef={register({ required: '名前を入力してください' })}
+                    fullWidth
+                    label="お名前"
+                  />
+                  {errors.name && <Error>{errors.name.message}</Error>}
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ backgroundColor: '#fff' }}
+                    variant="outlined"
+                    fullWidth
+                    label="メールアドレス"
+                    name="email"
+                    inputRef={register({
+                      required: 'メールアドレス入力してください',
+                      // pattern: {
+                      //   value: emailReg,
+                      //   message: '正しいメールアドレスを入力してください',
+                      // },
+                    })}
+                  />
+                  {errors.email && <Error>{errors.email.message}</Error>}
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ backgroundColor: '#fff' }}
+                    variant="outlined"
+                    fullWidth
+                    name="pass"
+                    label="パスワード"
+                    type="password"
+                    inputRef={register({
+                      required: 'パスワードを入力してください',
+                      // pattern: {
+                      //   value: passReg,
+                      //   message:
+                      //     'パスワードは6文字以上かつ１つの小文字と１つの大文字のアルファベット文字、１つの英数字を含む必要性があります。',
+                      // },
+                    })}
+                  />
+                  {errors.pass && <Error>{errors.pass.message}</Error>}
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ backgroundColor: '#fff' }}
+                    variant="outlined"
+                    fullWidth
+                    name="confirm_pass"
+                    label="確認用パスワード"
+                    type="password"
+                    inputRef={register({
+                      required: '確認用パスワードを入力してください',
+                      validate: (value) => {
+                        if (value === getValues()['pass']) {
+                          return true;
+                        } else {
+                          return 'パスワードと一致しません';
+                        }
+                      },
+                    })}
+                  />
+                  {errors.confirm_pass && (
+                    <Error>{errors.confirm_pass.message}</Error>
+                  )}
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
-      </Container>
-    </Layout>
+              <Button
+                style={{ backgroundColor: ' #EDE7F6', color: '#000' }}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                新規登録
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link href="#" variant="body2" style={{ color: '#E5E5E5' }}>
+                    もうすでにアカウントをお持ちですか？ サインイン
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+        </Container>
+      </Layout>
+    </div>
   );
 }
