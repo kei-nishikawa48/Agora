@@ -1,22 +1,17 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { Markdown } from './Markdown';
+import { Post } from '../interfaces';
 
-export type Post = {
-  title:String
-  id:number
-  text:String
-}
-
-type PostListDetailProps = {
-  item: Post;
+type Props = {
+  data: Post;
 };
-
-const PostListDetail = ({ item: post }: PostListDetailProps) => (
+const PostListDetail = ({ data }: Props) => (
   <div>
-    <h1>Detail for {post.title}</h1>
-    <p>ID: {post.id}</p>
-    <p>Description: {post.text}</p>
-    <Link href="/posts/edit" as={`/posts/${post.id}/edit`}>
+    <h1>Detail for {data.title}</h1>
+    <p>ID: {data.id}</p>
+    <Markdown value={data.text} />
+    <Link href="/posts/edit" as={`/posts/${data.id}/edit`}>
       <button>編集</button>
     </Link>
     {/* <button>削除</button> */}

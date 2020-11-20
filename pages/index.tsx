@@ -1,92 +1,25 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  gql,
-  InMemoryCache,
-  NormalizedCacheObject,
-} from '@apollo/client';
 import Link from 'next/link';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
-
-type User = {
-  name: string;
-  email: string;
-};
-
-type FormData = User;
+import { useQuery } from '@apollo/client';
+import { GET_USERS } from '../client_hooks/users';
+import { useCookies } from 'react-cookie';
 
 const IndexPage = () => {
-  const [users, set_users] = useState<User[]>([]);
-  const { register, handleSubmit, reset } = useForm<FormData>();
-  const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache: new InMemoryCache(),
-    uri: 'http://localhost:3000/graphql',
-  });
+  const [, , removeCookie] = useCookies(['token']);
+  const { data } = useQuery(GET_USERS);
+  data && console.log(data);
 
-  const handle_submit = async (data: FormData) => {
-    try {
-      const { name, email } = data;
-      const res = await client.mutate({
-        mutation: gql`
-          mutation {
-            create_user(name: "${name}", email: "${email}"){
-              name
-              email
-            }
-          }
-        `,
-      });
-      reset();
-      console.log(res);
-    } catch (res) {
-      console.log(res);
-    }
+  const logout = async () => {
+    removeCookie('token');
   };
-
-  const handle_click = async () => {
-    try {
-      const res = await client.query({
-        query: gql`
-          query {
-            users {
-              name
-              email
-            }
-          }
-        `,
-      });
-      set_users(res.data.users);
-    } catch (res) {
-      console.error(res);
-    }
-  };
-
   return (
-    <>
-      <form onSubmit={handleSubmit(handle_submit)}>
-        <input type="text" name="name" ref={register({ required: true })} />
-        <input type="email" name="email" ref={register({ required: true })} />
-        <button type="submit">Submit</button>
-      </form>
-      <ApolloProvider client={client}>
-        <Layout title="Home | Next.js + TypeScript Example">
-          <h1>Hello Next.js 👋</h1>
-          <p>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </p>
-        </Layout>
-        <button onClick={handle_click}>get text from graphql</button>
-        {users.map((user, i) => (
-          <li key={i}>
-            {user.name} {user.email}
-          </li>
-        ))}
-      </ApolloProvider>
-    </>
+    <Layout title="Home | Next.js + TypeScript Example">
+      <h1>Hello Next.js 👋</h1>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
+      <button onClick={logout}>logout</button>
+    </Layout>
   );
 };
 

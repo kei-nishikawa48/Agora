@@ -3,32 +3,33 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable(
-      'users',
+      'articles',
       {
         id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
+        title: {
           type: Sequelize.STRING(250),
+          allowNull: false,
+        },
+        text: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        tags: {
+          type: Sequelize.STRING,
           allowNull: true,
         },
-        email: {
+        user_id: {
           type: Sequelize.STRING,
           allowNull: false,
-          validate: {
-            notEmpty: true,
-            isEmail: true,
-          },
-        },
-        password: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-            len: [6, 50],
-          },
+          onDelete: 'CASCADE',
+          references: {
+            model: 'Users',
+            key: 'id',
+          }
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -45,5 +46,5 @@ module.exports = {
       }
     ),
 
-  down: (queryInterface) => queryInterface.dropTable('users'),
+  down: (queryInterface) => queryInterface.dropTable('articles'),
 };
