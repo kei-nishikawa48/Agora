@@ -4,14 +4,14 @@ import { Markdown } from './Markdown';
 import { Post } from '../interfaces';
 
 type Props = {
-  data: Post;
+  item: Post;
 };
-const PostListDetail = ({ data }: Props) => (
+const PostListDetail = ({ item }: Props) => (
   <div>
-    <h1>Detail for {data.title}</h1>
-    <p>ID: {data.id}</p>
-    <Markdown value={data.text} />
-    <Link href="/posts/edit" as={`/posts/${data.id}/edit`}>
+    <h1>Detail for {item.title}</h1>
+    <p>ID: {item.id}</p>
+    <Markdown value={item.text} />
+    <Link href="/posts/[id]/edit" as={`/posts/${item.id}/edit`}>
       <button>編集</button>
     </Link>
     {/* <button>削除</button> */}

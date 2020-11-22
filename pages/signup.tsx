@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { SIGN_UP } from '../client_hooks/users';
 import { useMutation } from '@apollo/client';
 import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
 
 const Error = styled.p`
   color: red;
@@ -49,6 +50,10 @@ interface Data {
 
 export default function SignUp() {
   const [cookies, setCookie] = useCookies(['token']);
+  const router = useRouter();
+  useEffect(() => {
+    cookies['token'] && router.push('/');
+  }, [cookies]);
   const [sign_up] = useMutation(SIGN_UP, {
     update: (_proxy, response) => {
       if (response.data.sign_up) {
@@ -70,13 +75,18 @@ export default function SignUp() {
   //   '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
   // );
   const signup_submit = async (data: Data) => {
-    sign_up({
-      variables: {
-        name: data.name,
-        email: data.email,
-        password: data.pass,
-      },
-    });
+    try {
+      await sign_up({
+        variables: {
+          name: data.name,
+          email: data.email,
+          password: data.pass,
+        },
+      });
+      location.replace('/');
+    } catch (er) {
+      console.log(er);
+    }
   };
 
   return (

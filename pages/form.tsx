@@ -8,23 +8,38 @@ import { useForm } from 'react-hook-form';
 import ChipsArray from '../components/Tags';
 import { CREATE_ARTICLE } from '../client_hooks/articles';
 import { useMutation } from '@apollo/client';
+import { useCookies } from 'react-cookie';
+import Router from 'next/router';
+
+type Detail = { title: string; tags: string; text: string };
 export default function Form() {
+  const [cookies] = useCookies(['token']);
+  React.useEffect(() => {
+    !Object.keys(cookies).length && Router.push('/signin');
+  }, [cookies]);
+
   const [value, set_value] = React.useState(``);
   const { register, handleSubmit, errors } = useForm();
   const [create_article] = useMutation(CREATE_ARTICLE);
-  const submit = async (detail: any) => {
-    await create_article({
-      variables: {
-        title: detail.title,
-        tags: detail.title,
-        text: value,
-      },
-    });
+  const submit = async (detail: Detail) => {
+    try{
+      await create_article({
+        variables: {
+          title: detail.title,
+          tags: detail.title,
+          text: value,
+        },
+      });
+    }
+    catch(er){
+      console.log(er)
+    }
   };
   return (
     <Layout>
       <form onSubmit={handleSubmit(submit)}>
         <input
+          type="text"
           name="title"
           placeholder="タイトル"
           ref={register({ required: true })}
