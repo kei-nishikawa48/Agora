@@ -1,16 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
 import { Post } from '../interfaces';
+import { makeStyles } from '@material-ui/core/styles';
+import classes from '*.module.css';
 
+const useStyles = makeStyles(() => ({
+  article: {
+    fontSize: '24px',
+    textDecoration: 'none',
+  },
+}));
 type Props = {
   data: Post;
 };
-const PostListItem = ({ data }: Props) => (
-  <Link href="/posts/[id]" as={`/posts/${data.id}`}>
-    <a>
-      {data.id}: {data.title}
-    </a>
-  </Link>
-);
-
+const PostListItem = ({ data }: Props) => {
+  const classes = useStyles();
+  return (
+    <Link href="/posts/[id]" as={`/posts/${data.id}`}>
+      <a className={classes.article}>{data.title}</a>
+    </Link>
+  );
+};
 export default PostListItem;
