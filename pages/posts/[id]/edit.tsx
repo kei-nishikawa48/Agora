@@ -9,9 +9,14 @@ import ChipsArray from '../../../components/Tags';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ARTICLE, UPDATE_ARTICLE } from '../../../client_hooks/articles';
 import { useRouter } from 'next/router';
-import {useCookies} from "react-cookie"
+import { useCookies } from 'react-cookie';
 
 export default function Form() {
+  const [tagName, set_tagName] = React.useState<string[]>([]);
+
+  const handle_change = (event: React.ChangeEvent<{ value: unknown }>) => {
+    set_tagName(event.target.value as string[]);
+  };
   const [cookies] = useCookies(['token']);
   const router = useRouter();
   React.useEffect(() => {
@@ -64,7 +69,7 @@ export default function Form() {
           />
         )}
         <Button>タグ追加</Button>
-        <ChipsArray />
+        <ChipsArray tagName={tagName} handle_change={handle_change}/>
         <Page>
           {data && <MarkdownEditor value={value} set_value={set_value} />}
         </Page>
@@ -76,8 +81,4 @@ export default function Form() {
 const Page = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-export const Container = styled.div`
-  width: 100%;
 `;
