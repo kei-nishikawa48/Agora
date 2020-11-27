@@ -10,6 +10,7 @@ const PostListDetail = ({ item }: Props) => (
   <div>
     <h1>Detail for {item.title}</h1>
     <p>ID: {item.id}</p>
+<p>tags:{item.tags}</p>
     <Markdown value={item.text} />
     <Link href="/posts/[id]/edit" as={`/posts/${item.id}/edit`}>
       <button>編集</button>

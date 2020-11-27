@@ -24,6 +24,7 @@ export const GET_ARTICLE = gql`
       text
       id
       title
+      tags
     }
   }
 `;
