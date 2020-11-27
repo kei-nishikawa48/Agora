@@ -13,7 +13,6 @@ import { useCookies } from 'react-cookie';
 
 export default function Form() {
   const [tagName, set_tagName] = React.useState<string[]>([]);
-
   const handle_change = (event: React.ChangeEvent<{ value: unknown }>) => {
     set_tagName(event.target.value as string[]);
   };
@@ -30,6 +29,7 @@ export default function Form() {
     variables: { id: articleid },
     onCompleted: () => {
       set_value(data.article.text);
+      set_tagName(data.article.tags.split(","))
     },
   });
 
@@ -43,7 +43,7 @@ export default function Form() {
           id: articleid,
           title: title,
           text: value,
-          tags: 'test',
+          tags: tagName.join(","),
         },
       });
     } else {
@@ -53,7 +53,7 @@ export default function Form() {
           id: articleid,
           title: title,
           text: value,
-          tags: 'test',
+          tags: tagName.join(','),
         },
       });
     }

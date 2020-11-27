@@ -31,8 +31,7 @@ const useStyle = makeStyles(() => ({
 
 type Detail = { title: string; tags: string; text: string };
 export default function Form() {
-    const [tagName, set_tagName] = React.useState<string[]>([]);
-
+    const [tagName, set_tagName] = React.useState<string[]>([]);  
     const handle_change = (event: React.ChangeEvent<{ value: unknown }>) => {
       set_tagName(event.target.value as string[]);
     };
@@ -50,7 +49,7 @@ export default function Form() {
       await create_article({
         variables: {
           title: detail.title,
-          tags: detail.title,
+          tags: tagName.join(','),
           text: value,
         },
       });
