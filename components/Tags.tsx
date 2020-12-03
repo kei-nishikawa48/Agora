@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   createStyles,
   makeStyles,
@@ -69,6 +69,10 @@ const tags = [
   'SQLite',
 ];
 
+interface IProps {
+  tagName: string[];
+  handle_change: (event: React.ChangeEvent<{ value: unknown }>) => void;
+}
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
     fontWeight:
@@ -78,14 +82,10 @@ function getStyles(name: string, personName: string[], theme: Theme) {
   };
 }
 
-export default function MultipleSelect() {
+const MultipleSelect: FC<IProps> =({tagName,handle_change})=> {
   const classes = useStyles();
   const theme = useTheme();
-  const [tagName, set_tagName] = React.useState<string[]>([]);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    set_tagName(event.target.value as string[]);
-  };
 
   return (
     <div>
@@ -96,7 +96,7 @@ export default function MultipleSelect() {
           id="demo-mutiple-chip"
           multiple
           value={tagName}
-          onChange={handleChange}
+          onChange={handle_change}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => (
             <div className={classes.chips}>
@@ -121,3 +121,5 @@ export default function MultipleSelect() {
     </div>
   );
 }
+
+export default MultipleSelect
