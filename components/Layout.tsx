@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import SimpleMenu from './SimpleMenu';
 
 type Props = {
   children?: ReactNode;
@@ -39,6 +40,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
         <Link href="/posts">
           <a>Posts List</a>
         </Link>{' '}
+        <SimpleMenu />
       </nav>
     </header>
     {children}
