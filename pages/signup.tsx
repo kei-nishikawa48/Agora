@@ -83,7 +83,7 @@ export default function SignUp() {
           password: data.pass,
         },
       });
-      location.replace('/');
+      history.back();
     } catch (er) {
       console.log(er);
     }
