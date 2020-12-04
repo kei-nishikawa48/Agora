@@ -81,7 +81,7 @@ export default function SignIn() {
           password: data.password,
         },
       });
-      location.replace('/');
+      history.back();
     } catch (er) {
       console.log(er);
     }
