@@ -1,6 +1,5 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
-import { AuthContext } from '../context/Auth';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const [cookies, setCookie] = useCookies(['token']);
+  useEffect(() => {
+    cookies['token'] && Router.push('/');
+  }, [cookies]);
   const [sign_in] = useMutation(SIGN_IN, {
     update: (_proxy, response) => {
       if (response.data.sign_in) {
@@ -66,22 +68,23 @@ export default function SignIn() {
 
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
-  const { currentUser } = useContext(AuthContext);
-  useEffect(() => {
-    currentUser && Router.push('/');
-  }, [currentUser]);
 
   interface data {
     email: string;
     password: string;
   }
-  const login = (data: data) => {
-    sign_in({
-      variables: {
-        email: data.email,
-        password: data.password,
-      },
-    });
+  const login = async (data: data) => {
+    try {
+      await sign_in({
+        variables: {
+          email: data.email,
+          password: data.password,
+        },
+      });
+      history.back();
+    } catch (er) {
+      console.log(er);
+    }
   };
   return (
     <div style={{ backgroundColor: '#4527A0' }}>
@@ -154,6 +157,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
               </Grid>
+<<<<<<< HEAD
             </form>
           </div>
           <Box mt={8}>
@@ -162,5 +166,20 @@ export default function SignIn() {
         </Container>
       </Layout>
     </div>
+=======
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    </Layout>
+>>>>>>> develop
   );
 }

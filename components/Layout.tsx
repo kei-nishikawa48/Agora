@@ -1,7 +1,13 @@
 import React, { ReactNode } from 'react';
-import Link from 'next/link';
+import dynamic from "next/dynamic"
 import Head from 'next/head';
+<<<<<<< HEAD
 import SimpleMenu from './SimpleMenu';
+=======
+const DynamicHeader = dynamic(() => import('./Header'), {
+  ssr: false,
+});
+>>>>>>> develop
 
 type Props = {
   children?: ReactNode;
@@ -15,6 +21,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
+<<<<<<< HEAD
     <header>
       <nav>
         <Link href="/">
@@ -43,6 +50,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
         <SimpleMenu />
       </nav>
     </header>
+=======
+    <DynamicHeader/>
+>>>>>>> develop
     {children}
     <footer>
       <hr />
