@@ -1,3 +1,4 @@
+import React from "react"
 import Button from '@material-ui/core/Button';
 import Link from 'next/link';
 import { useCookies } from 'react-cookie';
@@ -8,6 +9,8 @@ import Router from 'next/router';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../client_hooks/users';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles({
   button: {
@@ -27,6 +30,15 @@ const useStyles = makeStyles({
 });
 
 const HeaderItem = () => {
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
   const classes = useStyles();
   const [cookies] = useCookies(['token']);
   const { data } = useQuery(GET_CURRENT_USER);
@@ -59,16 +71,29 @@ const HeaderItem = () => {
             投稿
             <ArrowDropDownIcon />
           </IconButton>
-          <Link href="/users/[id]" as={`/users/${userId}`}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-            >
+
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleClick}
+          >
+            <Link href="/users/[id]" as={`/users/${userId}`}>
               <AccountCircle className={classes.icon} />
-            </IconButton>
-          </Link>
+            </Link>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </IconButton>
         </>
       )}
     </>

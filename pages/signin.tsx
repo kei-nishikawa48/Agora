@@ -81,70 +81,92 @@ export default function SignIn() {
           password: data.password,
         },
       });
-      location.replace('/');
+      history.back();
     } catch (er) {
       console.log(er);
     }
   };
   return (
-    <Layout>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form
-            onSubmit={handleSubmit(login)}
-            className={classes.form}
-            noValidate
-          >
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              inputRef={register}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              inputRef={register}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+    <div style={{ backgroundColor: '#4527A0' }}>
+      <Layout>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
+              Proshare
+            </Typography>
+            <form
+              onSubmit={handleSubmit(login)}
+              className={classes.form}
+              noValidate
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+              <TextField
+                style={{ color: '#EDE7F6' }}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="メールアドレス"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                inputRef={register}
+              />
+              <TextField
+                style={{ color: '#EDE7F6' }}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="パスワード"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                inputRef={register}
+              />
+              <FormControlLabel
+                style={{ color: '#fff' }}
+                control={
+                  <Checkbox value="remember" style={{ color: '#fff' }} />
+                }
+                label="次から入力を省略"
+              />
+              <Button
+                style={{ backgroundColor: '#EDE7F6', color: '#000' }}
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+              >
+                サインイン
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
+                    パスワードをお忘れですか？
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
+                    {'新規登録はこちらです'}
+                  </Link>
+                </Grid>
               </Grid>
+<<<<<<< HEAD
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </Layout>
+    </div>
+=======
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -158,5 +180,6 @@ export default function SignIn() {
         </Box>
       </Container>
     </Layout>
+>>>>>>> develop
   );
 }
