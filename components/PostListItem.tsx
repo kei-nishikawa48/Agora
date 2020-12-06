@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Post } from '../interfaces';
 import { makeStyles } from '@material-ui/core/styles';
-import classes from '*.module.css';
+
 
 const useStyles = makeStyles(() => ({
   article: {

@@ -19,6 +19,7 @@ type Article = {
   id: number;
   title: string;
   text: string;
+  tags:string
 };
 type Articles = Article[] | undefined;
 

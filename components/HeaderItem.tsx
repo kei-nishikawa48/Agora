@@ -8,6 +8,7 @@ import Router from 'next/router';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import SimpleMenu from "./SimpleMenu";
 const useStyles = makeStyles({
   button: {
     textTransform: 'none',
@@ -73,18 +74,19 @@ const HeaderItem = () => {
             onClick={handleClick}
           >
             <AccountCircle className={classes.icon} />
+            </IconButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
-              keepMounted
+              // keepMounted
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={() => console.log(Boolean(anchorEl))}>
+                My account
+              </MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
-          </IconButton>
         </>
       )}
     </>
