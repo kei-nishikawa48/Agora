@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link';
 import { useCookies } from 'react-cookie';
@@ -30,15 +30,15 @@ const useStyles = makeStyles({
 });
 
 const HeaderItem = () => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget);
-    };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const classes = useStyles();
   const [cookies] = useCookies(['token']);
   const { data } = useQuery(GET_CURRENT_USER);
@@ -71,7 +71,9 @@ const HeaderItem = () => {
             投稿
             <ArrowDropDownIcon />
           </IconButton>
-
+          <Link href="/users/[id]" as={`/users/${userId}`}>
+            <IconButton className={classes.button}>マイページ</IconButton>
+          </Link>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -79,9 +81,7 @@ const HeaderItem = () => {
             color="inherit"
             onClick={handleClick}
           >
-            <Link href="/users/[id]" as={`/users/${userId}`}>
-              <AccountCircle className={classes.icon} />
-            </Link>
+            <AccountCircle className={classes.icon} />
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
