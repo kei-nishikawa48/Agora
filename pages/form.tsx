@@ -84,33 +84,6 @@ export default function Form() {
         </Grid>
       </form>
     </BackGroundColor>
-{/* =======
-        <form onSubmit={handleSubmit(submit)}>
-          <input
-            className={classes.input}
-            type="text"
-            name="title"
-            placeholder="タイトル"
-            ref={register({ required: true })}
-          />
-          {errors.title && <p>タイトルを入力してください</p>}
-          <ChipsArray tagName={tagName} handle_change={handle_change} />
-          <Page>
-            <MarkdownEditor value={value} set_value={set_value} />
-          </Page>
-          <Grid
-            container
-            direction="row"
-            justify="flex-end"
-            alignItems="center"
-          >
-            <Button className={classes.button} type="submit">
-              Proshareに投稿
-            </Button>
-          </Grid>
-        </form>
-      </BackGroundColor>
->>>>>>> develop */}
     </Layout>
   );
 }

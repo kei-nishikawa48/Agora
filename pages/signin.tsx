@@ -157,7 +157,6 @@ export default function SignIn() {
                   </Link>
                 </Grid>
               </Grid>
-<<<<<<< HEAD
             </form>
           </div>
           <Box mt={8}>
@@ -166,20 +165,6 @@ export default function SignIn() {
         </Container>
       </Layout>
     </div>
-=======
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
-    </Layout>
->>>>>>> develop
+
   );
 }
