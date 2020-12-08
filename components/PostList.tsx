@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PostListItem from './PostListItem';
 import { GET_ARTICLES } from '../client_hooks/articles';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';
 // import { DELETE_ARTICLE } from '../client_hooks/articles';

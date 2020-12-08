@@ -1,13 +1,10 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { useQuery } from '@apollo/client';
-import { GET_CURRENT_USER } from '../client_hooks/users';
 import { useCookies } from 'react-cookie';
+import React from 'react';
 
 const IndexPage = () => {
   const [, , removeCookie] = useCookies(['token']);
-  const { data } = useQuery(GET_CURRENT_USER);
-  data && console.log(data);
   const logout = async () => {
     await removeCookie('token');
     location.replace('/signin');

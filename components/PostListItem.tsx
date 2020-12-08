@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Post } from '../interfaces';
 import { makeStyles } from '@material-ui/core/styles';
 
-
 const useStyles = makeStyles(() => ({
   article: {
     fontSize: '24px',
