@@ -15,6 +15,11 @@ const PostListDetail = ({ item }: Props) => (
     <Link href="/posts/[id]/edit" as={`/posts/${item.id}/edit`}>
       <button>編集</button>
     </Link>
+    
+    <Link href="/posts/">
+      <button>戻る</button>
+    </Link>
+
     {/* <button>削除</button> */}
   </div>
 );
