@@ -2,6 +2,8 @@ import * as React from 'react';
 import PostList from '../components/PostList';
 import { makeStyles } from '@material-ui/core/styles';
 import Layout from '../components/Layout';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',

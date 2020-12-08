@@ -62,7 +62,31 @@
     "nodemon": "^2.0.6",
     "react-test-renderer": "^17.0.1",
     "ts-node": "^9.0.0",
-    "typescript": "4.0"
+    "typescript": "4.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
+    "prettier": "^2.2.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": true,
+    "parser": "typescript",
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  }
 }

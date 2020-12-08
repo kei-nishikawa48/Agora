@@ -1,13 +1,17 @@
 import { gql, useQuery } from '@apollo/client';
 
-
-export const GET_CURRENT_USER=gql`
-query{
-  current_user{
-    name
+export const GET_CURRENT_USER = gql`
+  query {
+    current_user {
+      name
+      id
+      articles {
+        id
+        title
+      }
+    }
   }
-}
-`
+`;
 
 export const GET_USERS = gql`
   query {

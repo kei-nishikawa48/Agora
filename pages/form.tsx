@@ -11,31 +11,35 @@ import { useMutation } from '@apollo/client';
 import { useCookies } from 'react-cookie';
 import Router from 'next/router';
 import Grid from '@material-ui/core/Grid';
-import {makeStyles} from "@material-ui/core/styles"
+
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyle = makeStyles(() => ({
   button: {
-    marginTop:"3px",
+    marginTop: '3px',
     marginRight: '3rem',
     '&.MuiButton-root': {
       color: '#FFF',
       backgroundColor: '#4527A0',
     },
   },
-  input:{
-    width:"100%",
-    height:"55px",
-    fontSize:"25px"
-  }
+
+  input: {
+    width: '100%',
+    height: '55px',
+    fontSize: '25px',
+  },
 }));
 
 type Detail = { title: string; tags: string; text: string };
 export default function Form() {
-    const [tagName, set_tagName] = React.useState<string[]>([]);  
-    const handle_change = (event: React.ChangeEvent<{ value: unknown }>) => {
-      set_tagName(event.target.value as string[]);
-    };
-  const classes=useStyle()
+
+  const [tagName, set_tagName] = React.useState<string[]>([]);
+  const handle_change = (event: React.ChangeEvent<{ value: unknown }>) => {
+    set_tagName(event.target.value as string[]);
+  };
+  const classes = useStyle();
+
   const [cookies] = useCookies(['token']);
   React.useEffect(() => {
     !Object.keys(cookies).length && Router.push('/signin');
