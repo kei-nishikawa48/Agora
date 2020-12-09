@@ -104,26 +104,26 @@ export default function SignIn() {
               noValidate
             >
               <TextField
-                style={{ color: '#EDE7F6' }}
+                style={{ backgroundColor: '#fff' }}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="メールアドレス"
+                label={<span style={{ color: '#d1c4e9' }}>メールアドレス</span>}
                 name="email"
                 autoComplete="email"
                 autoFocus
                 inputRef={register}
               />
               <TextField
-                style={{ color: '#EDE7F6' }}
+                style={{ backgroundColor: '#fff' }}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                label="パスワード"
+                label={<span style={{ color: '#d1c4e9' }}>パスワード</span>}
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -165,6 +165,5 @@ export default function SignIn() {
         </Container>
       </Layout>
     </div>
-
   );
 }
