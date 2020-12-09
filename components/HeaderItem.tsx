@@ -71,9 +71,6 @@ const HeaderItem = () => {
             投稿
             <ArrowDropDownIcon />
           </IconButton>
-          <Link href="/users/[id]" as={`/users/${userId}`}>
-            <IconButton className={classes.button}>マイページ</IconButton>
-          </Link>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -82,19 +79,21 @@ const HeaderItem = () => {
             onClick={handleClick}
           >
             <AccountCircle className={classes.icon} />
-            </IconButton>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              // keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            // keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <Link href="/users/[id]" as={`/users/${userId}`}>
               <MenuItem onClick={() => console.log(Boolean(anchorEl))}>
                 My account
               </MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
+            </Link>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
         </>
       )}
     </>
