@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    height: '100vh',
+    height: '92vh',
     backgroundColor: '#EDE7F6',
   },
   articles: {

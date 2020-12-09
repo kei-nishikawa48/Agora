@@ -3,4 +3,7 @@ export type Post = {
   id:number
   text:string
   tags:string
+  user?:{
+    name?:string
+  }
 }
