@@ -40,9 +40,13 @@ const HeaderItem = () => {
     setAnchorEl(null);
   };
   const classes = useStyles();
-  const [cookies] = useCookies(['token']);
+  const [cookies, , removeCookie] = useCookies(['token']);
   const { data } = useQuery(GET_CURRENT_USER);
   const userId = `${data && data.current_user.id}`;
+  const logout = async () => {
+    await removeCookie('token');
+    location.replace('/signin');
+  };
   return (
     <>
       {!Object.keys(cookies).length ? (
@@ -92,7 +96,7 @@ const HeaderItem = () => {
                 My account
               </MenuItem>
             </Link>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </>
       )}
