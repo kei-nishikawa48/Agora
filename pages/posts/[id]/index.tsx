@@ -23,6 +23,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     text
     id
     title
+    tags
+    user{
+      name
+    }
   }
 }`;
   const res = await fetch({

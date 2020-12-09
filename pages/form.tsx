@@ -90,6 +90,7 @@ export default function Form() {
 
 const BackGroundColor = styled.div`
   background-color: #ede7f6;
+  height:92vh;
 `;
 const Page = styled.div`
   display: flex;

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     bar: { 
       backgroundColor: '#4527A0',
-      height: '80px' 
+      height:"8vh" 
     }
     
   }),

@@ -23,7 +23,7 @@ export const MarkdownEditor: FC<IProps> = ({ value, set_value }) => {
   return (
     <Container>
       <ReactMde
-        minEditorHeight={550}
+        minEditorHeight={600}
         maxEditorHeight={2000}
         value={value}
         onChange={set_value}
