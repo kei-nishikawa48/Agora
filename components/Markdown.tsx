@@ -11,7 +11,6 @@ interface IProps {
 export const Markdown: FC<IProps> = ({ value }) => {
   return (
     <Container>
-      Preview
       <ReactMarkdown
         renderers={{ code: CodeBlock }}
         plugins={[gfm]}
