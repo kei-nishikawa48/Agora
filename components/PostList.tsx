@@ -31,21 +31,7 @@ const PostList = () => {
       set_articles(data.articles);
     },
   });
-  // const [delete_article] = useMutation(DELETE_ARTICLE);
-  // const deletearticle = async (deleteid: number) => {
-  //   try {
-  //     await delete_article({
-  //       variables: {
-  //         id: deleteid,
-  //       },
-  //     });
-  //     set_articles(
-  //       articles?.filter((article: Article) => deleteid !== article.id)
-  //     );
-  //   } catch (er) {
-  //     console.log(er);
-  //   }
-  // };
+ 
   return (
     <>
       {articles &&
