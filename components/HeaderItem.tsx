@@ -7,8 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { useQuery } from '@apollo/client';
-import { GET_CURRENT_USER } from '../client_hooks/users';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -41,8 +39,6 @@ const HeaderItem = () => {
   };
   const classes = useStyles();
   const [cookies, , removeCookie] = useCookies(['token']);
-  const { data } = useQuery(GET_CURRENT_USER);
-  const userId = `${data && data.current_user.id}`;
   const logout = async () => {
     await removeCookie('token');
     location.replace('/signin');
@@ -91,7 +87,7 @@ const HeaderItem = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <Link href="/users/[id]" as={`/users/${userId}`}>
+            <Link href="/users/currentuser">
               <MenuItem onClick={() => console.log(Boolean(anchorEl))}>
                 My account
               </MenuItem>

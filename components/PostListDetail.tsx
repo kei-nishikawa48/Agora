@@ -36,7 +36,6 @@ const PostListDetail = ({ item }: Props) => {
           <HeadItems>
             <div style={{ width: '40%' }}> 作成者 : {item.user?.name}</div>
             <HeadItem>
-              <Button onClick={()=>deleteArticle(id)}>削除</Button>
               <Button
                 onClick={() => {
                   Router.push(`/posts/${id}/edit`);
@@ -44,6 +43,7 @@ const PostListDetail = ({ item }: Props) => {
               >
                 編集
               </Button>
+              <Button onClick={()=>deleteArticle(id)}>削除</Button>
             </HeadItem>
           </HeadItems>
           <h1>{item.title}</h1>

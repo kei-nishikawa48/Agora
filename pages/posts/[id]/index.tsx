@@ -37,7 +37,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   });
   const data = res.data;
 
-  // 実際はここで await fetch(`https://.../posts/${postId}`) などとして外部 API からデータを取得するイメージ
   return {
     props: { postId, data },
     revalidate: 60,
