@@ -5,5 +5,6 @@ export type Post = {
   tags:string
   user?:{
     name?:string
+    id?:string
   }
 }
