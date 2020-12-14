@@ -189,7 +189,7 @@ export default function SignUp() {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2" style={{ color: '#E5E5E5' }}>
+                  <Link href="#" variant="body2" onClick={()=>{router.push("/signin")}} style={{ color: '#E5E5E5' }}>
                     もうすでにアカウントをお持ちですか？ サインイン
                   </Link>
                 </Grid>

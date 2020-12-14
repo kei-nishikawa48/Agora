@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
-import Layout from '../components/Layout';
 import { SIGN_IN } from '../client_hooks/users';
 import { useMutation } from '@apollo/client';
 import { useCookies } from 'react-cookie';
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   paper: {
-    marginTop: theme.spacing(8),
+    paddingTop: theme.spacing(25),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -78,79 +77,75 @@ export default function SignIn() {
   };
   return (
     <div className={classes.background} style={{ backgroundColor: '#4527A0' }}>
-      <Layout>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
-              Proshare
-            </Typography>
-            <form
-              onSubmit={handleSubmit(login)}
-              className={classes.form}
-              noValidate
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
+            Proshare
+          </Typography>
+          <form
+            onSubmit={handleSubmit(login)}
+            className={classes.form}
+            noValidate
+          >
+            <TextField
+              style={{ backgroundColor: '#fff' }}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label={<span style={{ color: '#d1c4e9' }}>メールアドレス</span>}
+              name="email"
+              autoComplete="email"
+              autoFocus
+              inputRef={register}
+            />
+            <TextField
+              style={{ backgroundColor: '#fff' }}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label={<span style={{ color: '#d1c4e9' }}>パスワード</span>}
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              inputRef={register}
+            />
+            <FormControlLabel
+              style={{ color: '#fff' }}
+              control={<Checkbox value="remember" style={{ color: '#fff' }} />}
+              label="次から入力を省略"
+            />
+            <Button
+              style={{ backgroundColor: '#EDE7F6', color: '#000' }}
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
             >
-              <TextField
-                style={{ backgroundColor: '#fff' }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label={<span style={{ color: '#d1c4e9' }}>メールアドレス</span>}
-                name="email"
-                autoComplete="email"
-                autoFocus
-                inputRef={register}
-              />
-              <TextField
-                style={{ backgroundColor: '#fff' }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label={<span style={{ color: '#d1c4e9' }}>パスワード</span>}
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                inputRef={register}
-              />
-              <FormControlLabel
-                style={{ color: '#fff' }}
-                control={
-                  <Checkbox value="remember" style={{ color: '#fff' }} />
-                }
-                label="次から入力を省略"
-              />
-              <Button
-                style={{ backgroundColor: '#EDE7F6', color: '#000' }}
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-              >
-                サインイン
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
-                    パスワードをお忘れですか？
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
-                    {'新規登録はこちらです'}
-                  </Link>
-                </Grid>
+              サインイン
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
+                  パスワードをお忘れですか？
+                </Link>
               </Grid>
-            </form>
-          </div>
-        </Container>
-      </Layout>
+              <Grid item>
+                <Link href="#" variant="body2" onClick={()=>{Router.push("/signup")}}  style={{ color: '#EDE7F6' }}>
+                  新規登録はこちらです
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
     </div>
   );
 }
