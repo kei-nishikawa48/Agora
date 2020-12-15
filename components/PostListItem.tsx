@@ -15,7 +15,7 @@ type Props = {
 const PostListItem = ({ data }: Props) => {
   const classes = useStyles();
   return (
-    <Link href="/posts/[id]" as={`/posts/${data.id}`}>
+    <Link href={`/posts/${data.id}`}>
       <a className={classes.article}>{data.title}</a>
     </Link>
   );

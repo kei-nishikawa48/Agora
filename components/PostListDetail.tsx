@@ -24,7 +24,7 @@ const PostListDetail = ({ item }: Props) => {
           id: deleteid,
         },
       });
-      Router.push(`/users/${user}`)
+      Router.push(`/users/currentuser`)
     } catch (er) {
       console.log(er);
     }
