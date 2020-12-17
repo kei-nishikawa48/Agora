@@ -107,7 +107,11 @@ export default function SignIn() {
                 required
                 fullWidth
                 id="email"
-                label="メールアドレス"
+                label={
+                  <span style={{ backgroundColor: '#fff' }}>
+                    メールアドレス
+                  </span>
+                }
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -120,7 +124,11 @@ export default function SignIn() {
                 required
                 fullWidth
                 name="password"
-                label="パスワード"
+                label={
+                  <span style={{ backgroundColor: '#fff' }}>
+                    メールアドレス
+                  </span>
+                }
                 type="password"
                 id="password"
                 autoComplete="current-password"
