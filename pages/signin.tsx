@@ -101,7 +101,7 @@ export default function SignIn() {
               noValidate
             >
               <TextField
-                style={{ color: '#EDE7F6' }}
+                style={{ backgroundColor: '#fff' }}
                 variant="outlined"
                 margin="normal"
                 required
@@ -114,7 +114,7 @@ export default function SignIn() {
                 inputRef={register}
               />
               <TextField
-                style={{ color: '#EDE7F6' }}
+                style={{ backgroundColor: '#fff' }}
                 variant="outlined"
                 margin="normal"
                 required
