@@ -85,7 +85,7 @@ export default function Form() {
             <Button
               className={classes.button}
               type="submit"
-              onClick={() => Router.push('/home')}
+              onClick={() => Router.push('/')}
             >
               Proshareに投稿
             </Button>

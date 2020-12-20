@@ -3,7 +3,6 @@ import { Markdown } from './Markdown';
 import { Post } from '../interfaces';
 import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
-import { GET_ARTICLES } from '../client_hooks/articles';
 import { useMutation } from '@apollo/client';
 import Router from 'next/router';
 import { DELETE_ARTICLE } from '../client_hooks/articles';
@@ -15,7 +14,6 @@ type Props = {
 const PostListDetail = ({ item }: Props) => {
   const tags = item?.tags?.split(',');
   const id = item?.id;
-  const user=item?.user?.id
   const [delete_article] = useMutation(DELETE_ARTICLE);
   const deleteArticle = async (deleteid: number) => {
     try {
