@@ -20,9 +20,11 @@ import { useCookies } from 'react-cookie';
 const useStyles = makeStyles((theme) => ({
   background: {
     height: '100vh',
+    display: 'flex',
+    backgroundColor: '#4527A0',
+    alignItems: 'center',
   },
   paper: {
-    paddingTop: theme.spacing(25),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -76,7 +78,7 @@ export default function SignIn() {
     }
   };
   return (
-    <div className={classes.background} style={{ backgroundColor: '#4527A0' }}>
+    <div className={classes.background}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -93,12 +95,12 @@ export default function SignIn() {
           >
             <TextField
               style={{ backgroundColor: '#fff' }}
-              variant="outlined"
+              variant="filled"
               margin="normal"
               required
               fullWidth
               id="email"
-              label={<span style={{ color: '#d1c4e9' }}>メールアドレス</span>}
+              label={<span>メールアドレス</span>}
               name="email"
               autoComplete="email"
               autoFocus
@@ -106,22 +108,22 @@ export default function SignIn() {
             />
             <TextField
               style={{ backgroundColor: '#fff' }}
-              variant="outlined"
+              variant="filled"
               margin="normal"
               required
               fullWidth
               name="password"
-              label={<span style={{ color: '#d1c4e9' }}>パスワード</span>}
+              label={<span>パスワード</span>}
               type="password"
               id="password"
               autoComplete="current-password"
               inputRef={register}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               style={{ color: '#fff' }}
               control={<Checkbox value="remember" style={{ color: '#fff' }} />}
               label="次から入力を省略"
-            />
+            /> */}
             <Button
               style={{ backgroundColor: '#EDE7F6', color: '#000' }}
               type="submit"
@@ -132,13 +134,19 @@ export default function SignIn() {
               サインイン
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2" style={{ color: '#EDE7F6' }}>
                   パスワードをお忘れですか？
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
-                <Link href="#" variant="body2" onClick={()=>{Router.push("/signup")}}  style={{ color: '#EDE7F6' }}>
+                <Link
+                  variant="body2"
+                  onClick={() => {
+                    Router.push('/signup');
+                  }}
+                  style={{ color: '#EDE7F6', cursor: 'pointer' }}
+                >
                   新規登録はこちらです
                 </Link>
               </Grid>
