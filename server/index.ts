@@ -1,11 +1,10 @@
-// 環境変数を使う
-require('dotenv').config();
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import resolvers from './graphql/resolvers';
 import schema from './graphql/schema';
 import { models } from './models';
 import next from 'next';
 import express, { Request } from 'express';
+import dotenv from 'dotenv';
 import User from './models/user';
 import jwt from 'jsonwebtoken';
 
@@ -14,6 +13,9 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();
+
+// 環境変数を使う
+dotenv.config();
 
 /** クライアントから受け取ったトークンで認証 */
 const get_current_user = async (req: Request) => {

@@ -1,8 +1,8 @@
 import { Model, DataTypes, Association } from 'sequelize';
 import bcrypt from 'bcrypt';
+import { sequelize } from '../sequelize';
 import Article from './article';
 import Comment from './comment';
-import db from '../sequelize/models';
 
 class User extends Model {
   public id!: number;
@@ -61,7 +61,7 @@ User.init(
   },
   {
     tableName: 'users',
-    sequelize: db.sequelize,
+    sequelize: sequelize,
     // ユーザーのイベント発生時に自動で実行される
     hooks: {
       // ユーザーの生成時に呼び出される
@@ -87,8 +87,7 @@ User.hasMany(Comment, {
 });
 
 // メールアドレスからユーザーを取得
-User.find_by_email = async (email: string) =>
-  User.findOne({ where: { email } });
+User.find_by_email = async (email: string) => User.findOne({ where: { email } });
 // ユーザーのパスワードと入力されたパスワードを比較
 User.prototype.validate_password = async function (password: string) {
   return await bcrypt.compare(password, this.password);
