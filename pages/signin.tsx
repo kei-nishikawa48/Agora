@@ -86,7 +86,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
-            Proshare
+            Agora
           </Typography>
           <form
             onSubmit={handleSubmit(login)}

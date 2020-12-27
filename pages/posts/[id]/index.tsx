@@ -5,7 +5,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { Post } from '../../../interfaces';
 
 const fetch = createApolloFetch({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'https://morning-beyond-12035.herokuapp.com/graphql',
 });
 
 const StaticPropsDetail = ({ data }: { data: { article: Post } }) => {

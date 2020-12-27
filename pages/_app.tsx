@@ -18,7 +18,7 @@ import { useCookies, CookiesProvider } from 'react-cookie';
 export default function App({ Component, pageProps }: AppProps) {
   const [cookies] = useCookies(['token']);
   const httpLink = createHttpLink({
-    uri: 'http://localhost:3000/graphql',
+    uri: 'https://morning-beyond-12035.herokuapp.com/graphql',
   });
 
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)

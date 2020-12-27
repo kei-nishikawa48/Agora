@@ -101,7 +101,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" style={{ color: '#fff' }}>
-            Proshare
+            Agora
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(signup_submit)}>
             <Grid container spacing={2}>

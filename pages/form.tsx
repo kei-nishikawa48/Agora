@@ -87,7 +87,7 @@ export default function Form() {
               type="submit"
               onClick={() => Router.push('/')}
             >
-              Proshareに投稿
+              Agoraに投稿
             </Button>
           </Grid>
         </form>
