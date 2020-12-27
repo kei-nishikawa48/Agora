@@ -2,7 +2,7 @@
   "name": "Agora",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon --watch server server/index.ts",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc"

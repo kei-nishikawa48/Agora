@@ -99,7 +99,6 @@ export default function UserIndex() {
   const { data } = useQuery(GET_CURRENT_USER, {
     onCompleted: () => {
       set_currentUserArticles(data.current_user.articles);
-      // console.log(currentUserArticles[0].title);
     },
   });
 

@@ -56,6 +56,7 @@ export default function Form() {
           text: value,
         },
       });
+      Router.push('/')
     } catch (er) {
       console.log(er);
     }
@@ -85,7 +86,7 @@ export default function Form() {
             <Button
               className={classes.button}
               type="submit"
-              onClick={() => Router.push('/')}
+             
             >
               Agoraに投稿
             </Button>

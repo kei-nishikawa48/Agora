@@ -83,12 +83,11 @@ const HeaderItem = () => {
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
-            // keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
             <Link href="/users/currentuser">
-              <MenuItem onClick={() => console.log(Boolean(anchorEl))}>
+              <MenuItem>
                 My account
               </MenuItem>
             </Link>

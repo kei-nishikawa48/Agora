@@ -61,7 +61,6 @@ export default function SignUp() {
   const [sign_up] = useMutation(SIGN_UP, {
     update: (_proxy, response) => {
       if (response.data.sign_up) {
-        console.log(response.data.sign_up);
         setCookie('token', response.data.sign_up.token);
       } else {
         alert('サインアップが失敗しました。');
